@@ -1,7 +1,7 @@
 {
-  "name": "com.novaframework.unity.boot",
-  "displayName": "NovaFramework.Boot",
-  "description": "The Boot package for NovaFramework",
+  "name": "com.novaframework.unity.core.boot",
+  "displayName": "NovaFramework.Core.Boot",
+  "description": "The boot module of core system for NovaFramework",
   "version": "1.0.0",
   "unity": "2018.3",
   "unityRelease": "0f1",
@@ -10,12 +10,12 @@
   "author": {
     "name": "hurley",
     "email": "yoseasoft@163.com",
-    "url": "https://github.com/yoseasoft/com.novaframework.unity.boot"
+    "url": "https://github.com/yoseasoft/com.novaframework.unity.core.boot"
   },
   "repository": {
-    "name": "com.novaframework.unity.boot",
+    "name": "com.novaframework.unity.core.boot",
     "type": "git",
-    "url": "https://github.com/yoseasoft/com.novaframework.unity.boot.git"
+    "url": "https://github.com/yoseasoft/com.novaframework.unity.core.boot.git"
   },
   "relatedPackages": {},
   "dependencies": {}
