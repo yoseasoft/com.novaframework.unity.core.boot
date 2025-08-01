@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 ///
@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 程序配置管理类，用于对程启动所需的相关配置参数进行统一加载及配置
@@ -97,13 +97,13 @@ namespace AppEngine
             text = await LoadConfigureFileFromStreamAssetPath("Settings/app_conf.properties");
             if (false == ResolvePropertiesInfoFromText(text, variables))
             {
-                AppLogger.Error("Cannot resolve properties from target file, loaded environment settings failed.");
+                Logger.Error("Cannot resolve properties from target file, loaded environment settings failed.");
             }
 
             text = await LoadConfigureFileFromStreamAssetPath("Settings/channel_conf.properties");
             if (false == ResolvePropertiesInfoFromText(text, variables))
             {
-                AppLogger.Error("Cannot resolve properties from target file, loaded environment settings failed.");
+                Logger.Error("Cannot resolve properties from target file, loaded environment settings failed.");
             }
         }
 
@@ -126,7 +126,7 @@ namespace AppEngine
             await request.SendWebRequest();
             if (request.result != UnityEngine.Networking.UnityWebRequest.Result.Success)
             {
-                AppLogger.Error("获取目标配置文件‘{%s}’失败，错误原因：{%s}！", path, request.error);
+                Logger.Error("获取目标配置文件‘{%s}’失败，错误原因：{%s}！", path, request.error);
                 return null;
             }
 
@@ -141,7 +141,7 @@ namespace AppEngine
         /// <returns>字符串文本解析成功返回true，否则返回false</returns>
         private static bool ResolvePropertiesInfoFromText(string text, IDictionary<string, string> variables)
         {
-            AppLogger.Assert(null != variables);
+            Logger.Assert(null != variables);
 
             string line = null;
             System.IO.StringReader reader = new System.IO.StringReader(text);
@@ -160,7 +160,7 @@ namespace AppEngine
                 if (str_list.Length != 2)
                 {
                     // 文本格式错误
-                    AppLogger.Warn("Invalid property content with text '{%s}', parsing it failed.", line);
+                    Logger.Warn("Invalid property content with text '{%s}', parsing it failed.", line);
                     return false;
                 }
 
@@ -168,7 +168,7 @@ namespace AppEngine
                 string value = str_list[1].Trim();
                 if (variables.ContainsKey(key))
                 {
-                    AppLogger.Warn("The property key '{%s}' was already exist, repeat added it failed.", key);
+                    Logger.Warn("The property key '{%s}' was already exist, repeat added it failed.", key);
                     // variables.Remove(key);
                     return false;
                 }

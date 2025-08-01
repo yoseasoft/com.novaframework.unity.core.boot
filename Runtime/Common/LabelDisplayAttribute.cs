@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2025, Hurley, Independent Studio.
 ///
@@ -32,7 +32,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 字段名称标签的属性定义

@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
 ///
@@ -31,7 +31,7 @@ using System.Collections.Generic;
 
 using GooAsset;
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 应用程序启动流程管理类，用于对应用程序启动流程及脚本加载提供接口函数
@@ -66,7 +66,7 @@ namespace AppEngine
         /// <summary>
         /// 游戏运行库Hotfix库名
         /// </summary>
-        public const string GameHotfixDllName = "GameHotfix";
+        const string GameHotfixDllName = "GameHotfix";
 
         /// <summary>
         /// Dll资源目录

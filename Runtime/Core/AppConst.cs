@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
 ///
@@ -22,7 +22,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 应用程序常量设置类，用于统一管理当前模块中所需要用到的常量定义

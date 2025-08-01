@@ -1,6 +1,6 @@
 {
   "name": "com.novaframework.unity.core.boot",
-  "displayName": "NovaFramework.Core.Boot",
+  "displayName": "NovaFramework.Boot",
   "description": "The boot module of core system for NovaFramework",
   "version": "1.0.0",
   "unity": "2018.3",

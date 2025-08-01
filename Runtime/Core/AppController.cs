@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2023 - 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 ///
@@ -22,7 +22,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 生命周期总入口

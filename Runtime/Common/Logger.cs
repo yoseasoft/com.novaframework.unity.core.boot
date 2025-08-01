@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2025, Hurley, Independent Studio.
 ///
@@ -22,12 +22,12 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 程序日志接口类，用于在程序中提供日志输出接口函数
     /// </summary>
-    internal static class AppLogger
+    internal static class Logger
     {
         /// <summary>
         /// 普通信息输出日志接口函数

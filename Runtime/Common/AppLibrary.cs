@@ -1,5 +1,5 @@
 /// -------------------------------------------------------------------------------
-/// AppEngine Framework
+/// CoreEngine Framework
 ///
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2025, Hurley, Independent Studio.
@@ -34,7 +34,7 @@ using SystemAssembly = System.Reflection.Assembly;
 using SystemFieldInfo = System.Reflection.FieldInfo;
 using SystemBindingFlags = System.Reflection.BindingFlags;
 
-namespace AppEngine
+namespace CoreEngine
 {
     /// <summary>
     /// 程序库接口类，用于对程序启动所需的模块进行定义及加载管理
@@ -304,18 +304,18 @@ namespace AppEngine
                 if (!(field.IsLiteral && false == field.IsInitOnly))
                 {
                     // 非const常量属性定义
-                    AppLogger.Error("The library binding field '{0}' must be const type, please checked it before doing this operation.", field.Name);
+                    Logger.Error("The library binding field '{0}' must be const type, please checked it before doing this operation.", field.Name);
                     continue;
                 }
 
                 LibraryType libraryType = attribute.LibraryType;
 
-                AppLogger.Assert(false == _libraryTypeMapping.ContainsKey(field.Name));
+                Logger.Assert(false == _libraryTypeMapping.ContainsKey(field.Name));
                 _libraryTypeMapping.Add(field.Name, libraryType);
 
                 LibraryInfo libraryInfo = new LibraryInfo(field.Name, libraryType, attribute);
 
-                AppLogger.Assert(false == _libraryInfoMapping.ContainsKey(libraryType));
+                Logger.Assert(false == _libraryInfoMapping.ContainsKey(libraryType));
                 _libraryInfoMapping.Add(libraryType, libraryInfo);
             }
         }
