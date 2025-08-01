@@ -1,10 +1,10 @@
 {
-    "name": "Nova.Core.Boot",
+    "name": "Nova-Core.Boot",
     "rootNamespace": "",
     "references": [
-        "UniTask",
         "HybridCLR.Runtime",
-        "GooAsset"
+        "GooAsset",
+        "Nova-Pkg.UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
