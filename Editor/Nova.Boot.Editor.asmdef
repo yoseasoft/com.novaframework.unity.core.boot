@@ -2,6 +2,8 @@
     "name": "Nova.Boot.Editor",
     "rootNamespace": "",
     "references": [
+        "HybridCLR.Runtime",
+        "HybridCLR.Editor",
         "GooAsset",
         "Nova.Boot",
         "Nova.Configure",
