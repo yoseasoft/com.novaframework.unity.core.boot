@@ -1,13 +1,16 @@
 {
-    "name": "Nova.Boot",
+    "name": "Nova.Boot.Editor",
     "rootNamespace": "",
     "references": [
-        "HybridCLR.Runtime",
         "GooAsset",
+        "Nova.Boot",
         "Nova.Configure",
+        "Nova.Configure.Editor",
         "Nova.UniTask"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

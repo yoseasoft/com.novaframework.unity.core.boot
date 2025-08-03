@@ -39,49 +39,14 @@ namespace CoreEngine
     public static class AppStart
     {
         /// <summary>
-        /// Api库
-        /// </summary>
-        // public const string ApiDllName = "Api";
-
-        /// <summary>
         /// 配置、协议库名
         /// </summary>
         public const string AgenDllName = "Agen";
 
         /// <summary>
-        /// Nova运行库名
-        /// </summary>
-        public const string NovaDllName = "Nova.Engine";
-
-        /// <summary>
-        /// 基础运行库名
-        /// </summary>
-        public const string BasicDllName = "Nova.Basic";
-
-        /// <summary>
-        /// 游戏运行库名
-        /// </summary>
-        public const string GameDllName = "Game";
-
-        /// <summary>
-        /// 游戏运行库Hotfix库名
-        /// </summary>
-        const string GameHotfixDllName = "GameHotfix";
-
-        /// <summary>
-        /// Dll资源目录
-        /// </summary>
-        public const string CodeAssetPath = "Assets/_Resources/Code";
-
-        /// <summary>
-        /// 需要加载的程序集名字列表
-        /// </summary>
-        public static readonly List<string> assemblyNameList = new() { NovaDllName, BasicDllName, "Nova.Import", "Nova.Sample", AgenDllName, GameDllName, GameHotfixDllName };
-
-        /// <summary>
         /// 名字对应的程序集
         /// </summary>
-        static readonly Dictionary<string, Assembly> s_name2Assembly = new();
+        static readonly Dictionary<string, Assembly> _name2Assembly = new();
 
         /// <summary>
         /// 主控制器实例
@@ -93,20 +58,18 @@ namespace CoreEngine
         /// </summary>
         public static Assembly GetLoadedAssembly(string name)
         {
-            return s_name2Assembly.GetValueOrDefault(name);
+            return _name2Assembly.GetValueOrDefault(name);
         }
 
         [RuntimeInitializeOnLoadMethod]
         static void Start()
         {
             // Main场景才运行
-            if (false == UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToLower().Equals(AppConst.AppControllerSceneName))
+            if (false == UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToLower().Equals(AppDefine.AppControllerSceneName))
             {
                 return;
             }
 
-            AppLibrary.Startup();
-            
             StartAsync().Forget();
         }
 
@@ -143,38 +106,55 @@ namespace CoreEngine
         /// </summary>
         static async void StartEngine()
         {
-            Type type = s_name2Assembly[BasicDllName]?.GetType(AppConst.AppControllerClassName);
-            if (type is null)
+            Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
+            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            if (assemblyType is null)
             {
-                Debug.LogError($"加载Type:{AppConst.AppControllerClassName}失败");
+                Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
             }
 
             IReadOnlyDictionary<string, string> vars = await AppConfigure.LoadEnvironmentSettings();
 
-            UnityEngine.GameObject gameObject = new UnityEngine.GameObject { name = AppConst.AppControllerGameObjectName };
+            UnityEngine.GameObject gameObject = new UnityEngine.GameObject { name = AppDefine.AppControllerGameObjectName };
             appController = gameObject.AddComponent<AppController>();
 
             // 确保该脚本不会被移除
             UnityEngine.Object.DontDestroyOnLoad(appController);
 
-            type.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { s_name2Assembly, false });
+            assemblyType.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { _name2Assembly, false });
 
-            type.GetMethod("Start", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { appController, vars });
+            assemblyType.GetMethod("Start", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { appController, vars });
         }
 
         static void ReloadEngine()
         {
-            Type type = s_name2Assembly[BasicDllName]?.GetType(AppConst.AppControllerClassName);
-            if (type is null)
+            Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
+            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            if (assemblyType is null)
             {
-                Debug.LogError($"加载Type:{AppConst.AppControllerClassName}失败");
+                Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
             }
 
-            type.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { s_name2Assembly, true });
+            assemblyType.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { _name2Assembly, true });
 
-            type.GetMethod("Reload", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { appController });
+            assemblyType.GetMethod("Reload", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, null);
+        }
+
+        public static void ReloadAssets(int type)
+        {
+            Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
+            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            if (assemblyType is null)
+            {
+                Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
+                return;
+            }
+
+            assemblyType.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { _name2Assembly, true });
+
+            assemblyType.GetMethod("Reimport", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { type });
         }
 
         /// <summary>
@@ -210,9 +190,10 @@ namespace CoreEngine
         /// </summary>
         static void LoadAssembliesFromCurrentDomain()
         {
-            foreach (string assemblyName in assemblyNameList)
+            IList<string> assemblyNames = AppLibrary.GetAllAssemblyNames();
+            foreach (string assemblyName in assemblyNames)
             {
-                s_name2Assembly.Add(assemblyName, Assembly.Load(assemblyName));
+                _name2Assembly.Add(assemblyName, Assembly.Load(assemblyName));
             }
         }
 
@@ -222,34 +203,36 @@ namespace CoreEngine
         static async UniTask LoadAssembliesFromAssetsAsync()
         {
             Dictionary<string, Asset> name2DllAssets = new();
-            foreach (string dllName in assemblyNameList)
+            IList<string> assemblyNames = AppLibrary.GetAllAssemblyNames();
+            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
+            foreach (string dllName in assemblyNames)
             {
                 string fileName = $"{dllName}.dll";
-                Asset asset = AssetManagement.LoadAssetAsync($"{CodeAssetPath}/{fileName}.bytes", typeof(TextAsset));
+                Asset asset = AssetManagement.LoadAssetAsync($"{libraryPath}/{fileName}.bytes", typeof(TextAsset));
                 name2DllAssets.Add(fileName, asset);
 
                 fileName = $"{dllName}.pdb";
-                asset = AssetManagement.LoadAssetAsync($"{CodeAssetPath}/{fileName}.bytes", typeof(TextAsset));
+                asset = AssetManagement.LoadAssetAsync($"{libraryPath}/{fileName}.bytes", typeof(TextAsset));
                 name2DllAssets.Add(fileName, asset);
             }
 
             Asset[] dllAssets = name2DllAssets.Values.ToArray();
             await UniTask.WaitUntil(() => { return dllAssets.All(asset => asset.IsDone); });
 
-            foreach (string dllName in assemblyNameList)
+            foreach (string dllName in assemblyNames)
             {
 #if UNITY_EDITOR
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载
                 if (dllName == AgenDllName)
                 {
-                    s_name2Assembly.Add(dllName, Assembly.Load(dllName));
+                    _name2Assembly.Add(dllName, Assembly.Load(dllName));
                     continue;
                 }
 #endif
 
-                byte[] assBytes = Utility.Cryptography.Decrypt((name2DllAssets[$"{dllName}.dll"].result as TextAsset).bytes, Uqs3, Dnw4);
-                byte[] pdbBytes = Utility.Cryptography.Decrypt((name2DllAssets[$"{dllName}.pdb"].result as TextAsset).bytes, Uqs3, Dnw4);
-                s_name2Assembly.Add(dllName, Assembly.Load(assBytes, pdbBytes));
+                byte[] assBytes = AppSecret.Decrypt((name2DllAssets[$"{dllName}.dll"].result as TextAsset).bytes);
+                byte[] pdbBytes = AppSecret.Decrypt((name2DllAssets[$"{dllName}.pdb"].result as TextAsset).bytes);
+                _name2Assembly.Add(dllName, Assembly.Load(assBytes, pdbBytes));
             }
 
             foreach (Asset asset in dllAssets)
@@ -273,23 +256,21 @@ namespace CoreEngine
         /// </summary>
         public async static UniTask ReloadAssembliesFromAssetsAsync()
         {
-            Asset dllAsset = AssetManagement.LoadAssetAsync($"{CodeAssetPath}/GameHotfix.dll.bytes", typeof(TextAsset));
-            Asset pdbAsset = AssetManagement.LoadAssetAsync($"{CodeAssetPath}/GameHotfix.pdb.bytes", typeof(TextAsset));
-            await dllAsset;
-            await pdbAsset;
-            byte[] dllBytes = Utility.Cryptography.Decrypt((dllAsset.result as TextAsset).bytes, Uqs3, Dnw4);
-            byte[] pdbBytes = Utility.Cryptography.Decrypt((pdbAsset.result as TextAsset).bytes, Uqs3, Dnw4);
-            s_name2Assembly[GameHotfixDllName] = Assembly.Load(dllBytes, pdbBytes);
-        }
+            IList<string> assemblyNames = AppLibrary.GetAllReloadableAssemblyNames();
+            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
 
-        const string Uqs3 = "TmKYR6VVLBjsdfXh4fEpRc9yG6Z73sqU";
-        const string Dnw4 = "Nzcfvd2Nc0Tx4Wnd";
+            for (int n = 0; n < assemblyNames.Count; ++n)
+            {
+                string assemblyName = assemblyNames[n];
 
-#if UNITY_EDITOR
-        public static (string, string) GetKey()
-        {
-            return (Uqs3, Dnw4);
+                Asset dllAsset = AssetManagement.LoadAssetAsync($"{libraryPath}/{assemblyName}.dll.bytes", typeof(TextAsset));
+                Asset pdbAsset = AssetManagement.LoadAssetAsync($"{libraryPath}/{assemblyName}.pdb.bytes", typeof(TextAsset));
+                await dllAsset;
+                await pdbAsset;
+                byte[] dllBytes = AppSecret.Decrypt((dllAsset.result as TextAsset).bytes);
+                byte[] pdbBytes = AppSecret.Decrypt((pdbAsset.result as TextAsset).bytes);
+                _name2Assembly[assemblyName] = Assembly.Load(dllBytes, pdbBytes);
+            }
         }
-#endif
     }
 }

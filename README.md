@@ -1,6 +1,6 @@
-﻿## NovaFramework - Unity 工程插件
+﻿## NovaFramework - Unity 核心库
 
-NovaFramework的Boot插件，提供程序启动相关的功能接口。
+NovaFramework的启动库，提供程序启动相关的功能接口。
 
 ## 使用文档
 
