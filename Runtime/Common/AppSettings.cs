@@ -66,7 +66,7 @@ namespace CoreEngine
         public bool dylinkMode = false;
 
         // ----------------------------------------------------------------------------------------------------
-        [Header("应用程序配置参数")]
+        [Header("应用程序系统参数")]
 
         [FieldLabelName("应用名称")]
         [Tooltip("应用程序的唯一名称，将应用在安装环境下的目录与文件命名")]
@@ -93,18 +93,7 @@ namespace CoreEngine
         public int designResolutionHeight = 1080;
 
         // ----------------------------------------------------------------------------------------------------
-        [Header("应用程序教程设置")]
-
-        [FieldLabelName("教程模式")]
-        [Tooltip("当此模式打开后，程序将跳转到演示案例环境下进行启动")]
-        public bool tutorialMode = false;
-
-        [FieldLabelName("教程示例")]
-        [Tooltip("通过选择教程示例，程序运行后将在对应的案例环境下进行启动")]
-        public TutorialSampleType tutorialSampleType = TutorialSampleType.Unknown;
-
-        // ----------------------------------------------------------------------------------------------------
-        [Header("自定义环境变量设置")]
+        [Header("自定义环境变量")]
 
         public List<CustomizeEnvironmentVariable> customizeEnvironmentVariables = new();
 
@@ -161,21 +150,5 @@ namespace CoreEngine
 
         [Header("崩溃模式")]
         Fatal = 4,
-    }
-
-    /// <summary>
-    /// 教程示例的类型定义
-    /// </summary>
-    public enum TutorialSampleType : int
-    {
-        Unknown = 0,
-        TextFormat,
-        SymbolParser,
-        DynamicInvokeGenerator,
-        InversionOfControl,
-        ObjectLifecycle,
-        DispatchCall,
-        DependencyInject,
-        PerformanceAnalysis,
     }
 }

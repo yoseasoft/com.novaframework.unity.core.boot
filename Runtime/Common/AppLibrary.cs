@@ -40,6 +40,10 @@ namespace CoreEngine
         /// 可重载程序集名称列表
         /// </summary>
         static IList<string> _reloadableAssemblyNames = null;
+        /// <summary>
+        /// 元数据链接库名称列表
+        /// </summary>
+        static IList<string> _aotLibraryNames = null;
 
         /// <summary>
         /// 获取当前系统注册的全部程序集名称
@@ -52,7 +56,7 @@ namespace CoreEngine
                 _assemblyNames = DynamicLibrary.GetAllAssemblyNames((info) =>
                 {
                     // 教程相关程序模块的过滤
-                    if (!AppSettings.Instance.tutorialMode && info.tutorial)
+                    if (!AppConfigures.Instance.tutorialMode && info.tutorial)
                         return false;
 
                     return true;
@@ -72,7 +76,7 @@ namespace CoreEngine
             {
                 _reloadableAssemblyNames = DynamicLibrary.GetAllReloadableAssemblyNames((info) =>
                 {
-                    if (!AppSettings.Instance.tutorialMode && info.tutorial)
+                    if (!AppConfigures.Instance.tutorialMode && info.tutorial)
                         return false;
 
                     return true;
@@ -80,6 +84,20 @@ namespace CoreEngine
             }
 
             return _reloadableAssemblyNames;
+        }
+
+        /// <summary>
+        /// 获取当前系统注册的全部元数据链接库名称
+        /// </summary>
+        /// <returns>返回全部元数据链接库的名称列表</returns>
+        public static IList<string> GetAllGenericAotNames()
+        {
+            if (null == _aotLibraryNames)
+            {
+                _aotLibraryNames = DynamicLibrary.GetAllGenericAotNames();
+            }
+
+            return _aotLibraryNames;
         }
     }
 }

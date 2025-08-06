@@ -2,6 +2,7 @@
 /// CoreEngine Framework
 ///
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
+/// Copyright (C) 2025, Hainan Yuanyou Information Tecdhnology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -29,21 +30,22 @@ using Cysharp.Threading.Tasks;
 namespace CoreEngine
 {
     /// <summary>
-    /// 程序配置管理类，用于对程启动所需的相关配置参数进行统一加载及配置
+    /// 程序配置加载器类，用于对程启动所需的相关配置参数进行统一加载管理
     /// </summary>
-    public static class AppConfigure
+    internal static class ConfigurationLoader
     {
         /// <summary>
         /// 加载环境配置的设置信息
         /// </summary>
-        internal static async UniTask<IReadOnlyDictionary<string, string>> LoadEnvironmentSettings()
+        // public static async UniTask<IReadOnlyDictionary<string, string>> LoadEnvironmentSettings()
+        public static IReadOnlyDictionary<string, string> LoadEnvironmentSettings()
         {
             IDictionary<string, string> vars = new Dictionary<string, string>();
 
+            // 系统配置数据
             AppSettings settings = AppSettings.Instance;
 
-            // SetProperty
-
+            // 运行模式
 #if UNITY_EDITOR
             vars.Add(nameof(settings.editorMode), settings.editorMode.ToString());
 #else
@@ -60,7 +62,7 @@ namespace CoreEngine
             vars.Add(nameof(settings.offlineMode), settings.offlineMode.ToString());
             vars.Add(nameof(settings.dylinkMode), settings.dylinkMode.ToString());
 
-            // SetVariable(应用设置)
+            // 系统参数
             vars.Add(nameof(settings.applicationName), settings.applicationName.ToString());
             vars.Add(nameof(settings.applicationCode), settings.applicationCode.ToString());
             vars.Add(nameof(settings.frameRate), settings.frameRate.ToString());
@@ -68,23 +70,53 @@ namespace CoreEngine
             vars.Add(nameof(settings.designResolutionWidth), settings.designResolutionWidth.ToString());
             vars.Add(nameof(settings.designResolutionHeight), settings.designResolutionHeight.ToString());
 
-            // 示例相关
-#if DEBUG
-            vars.Add(nameof(settings.tutorialMode), settings.tutorialMode.ToString());
-#else
-            vars.Add(nameof(settings.tutorialMode), "false");
-#endif
-            vars.Add(nameof(settings.tutorialSampleType), settings.tutorialSampleType.ToString());
-
+            // 自定义环境变量
             foreach (CustomizeEnvironmentVariable v in settings.customizeEnvironmentVariables)
             {
                 vars.Add(v.key, v.value);
             }
 
-            await LoadConfigureSettingsVariables(vars);
+            // 应用配置数据
+            AppConfigures configures = AppConfigures.Instance;
+
+            // 运行设置
+            vars.Add(nameof(configures.screenNeverSleep), configures.screenNeverSleep.ToString());
+
+            // 日志设置
+            int logChannel = 0;
+            for (int n = 0; null != configures.logChannel && n < configures.logChannel.Length; ++n)
+            {
+                logChannel |= (int) configures.logChannel[n];
+            }
+
+            vars.Add(nameof(configures.logChannel), logChannel.ToString());
+
+#if DEBUG
+            vars.Add(nameof(configures.logUsingCustomColor), configures.logUsingCustomColor.ToString());
+            vars.Add(nameof(configures.logUsingSystemColor), configures.logUsingSystemColor.ToString());
+#else
+            vars.Add(nameof(configures.logUsingCustomColor), "false");
+            vars.Add(nameof(configures.logUsingSystemColor), "false");
+#endif
+
+            // 教程设置
+#if DEBUG
+            vars.Add(nameof(configures.tutorialMode), configures.tutorialMode.ToString());
+#else
+            vars.Add(nameof(configures.tutorialMode), "false");
+#endif
+            if ((int) configures.tutorialSampleType > 0)
+            {
+                // 合法配置教程案例
+                vars.Add(nameof(configures.tutorialSampleType), configures.tutorialSampleType.ToString());
+            }
+
+            // await LoadConfigureSettingsVariables(vars);
 
             return new System.Collections.ObjectModel.ReadOnlyDictionary<string, string>(vars);
         }
+
+        #region 属性文件加载、解析处理接口函数
 
         /// <summary>
         /// 加载配置参数数据
@@ -179,5 +211,7 @@ namespace CoreEngine
 
             return true;
         }
+
+        #endregion
     }
 }

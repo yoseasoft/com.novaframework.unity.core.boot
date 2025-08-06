@@ -18,5 +18,7 @@
     "url": "https://github.com/yoseasoft/com.novaframework.unity.core.boot.git"
   },
   "relatedPackages": {},
-  "dependencies": {}
+  "dependencies": {
+    "com.unity.modules.assetbundle": "1.0.0"
+  }
 }

@@ -2,6 +2,7 @@
 /// CoreEngine Framework
 ///
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
+/// Copyright (C) 2025, Hainan Yuanyou Information Tecdhnology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -104,7 +105,7 @@ namespace CoreEngine
         /// <summary>
         /// 添加基础运行控制组件
         /// </summary>
-        static async void StartEngine()
+        static void StartEngine()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
@@ -114,7 +115,7 @@ namespace CoreEngine
                 return;
             }
 
-            IReadOnlyDictionary<string, string> vars = await AppConfigure.LoadEnvironmentSettings();
+            IReadOnlyDictionary<string, string> vars = ConfigurationLoader.LoadEnvironmentSettings();
 
             UnityEngine.GameObject gameObject = new UnityEngine.GameObject { name = AppDefine.AppControllerGameObjectName };
             appController = gameObject.AddComponent<AppController>();
@@ -167,11 +168,12 @@ namespace CoreEngine
                 return;
             }
 
-            List<string> aotDllNames = new() { "System.Core.dll", "System.dll", "mscorlib.dll", "UnityEngine.CoreModule.dll" };
+            IList<string> aotDllNames = AppLibrary.GetAllGenericAotNames();
             var dllAssets = new Asset[aotDllNames.Count];
             for (int i = 0; i < aotDllNames.Count; i++)
             {
-                var asset = AssetManagement.LoadAssetAsync($"Assets/_Resources/Aot/{Utility.Platform.CurrentPlatformName}/{aotDllNames[i]}.bytes", typeof(TextAsset));
+                string filePath = SystemPath.GetFilePath(ResourcePathType.MonoAotPath, Utility.Platform.CurrentPlatformName, $"{aotDllNames[i]}.bytes");
+                var asset = AssetManagement.LoadAssetAsync(filePath, typeof(TextAsset));
                 dllAssets[i] = asset;
             }
             await UniTask.WaitUntil(() => { return dllAssets.All(asset => asset.IsDone); });

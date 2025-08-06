@@ -1,0 +1,153 @@
+/// -------------------------------------------------------------------------------
+/// CoreEngine Framework
+///
+/// Copyright (C) 2017 - 2020, Shanghai Tommon Network Technology Co., Ltd.
+/// Copyright (C) 2020 - 2022, Guangzhou Xinyuan Technology Co., Ltd.
+/// Copyright (C) 2022 - 2023, Shanghai Bilibili Technology Co., Ltd.
+/// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
+/// Copyright (C) 2025, Hainan Yuanyou Information Tecdhnology Co., Ltd. Guangzhou Branch
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in
+/// all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+/// THE SOFTWARE.
+/// -------------------------------------------------------------------------------
+
+using UnityEngine;
+
+namespace CoreEngine
+{
+    /// <summary>
+    /// 应用程序的基础配置，用于应用正式启动的参数设置
+    /// </summary>
+    [CreateAssetMenu(fileName = "NewAppConfigures", menuName = "Nova Framework/Application Configures")] // 创建后可以不再显示在右键菜单
+    public class AppConfigures : ScriptableObject
+    {
+        // ----------------------------------------------------------------------------------------------------
+        [Header("应用程序运行设置")]
+
+        [FieldLabelName("休眠模式")]
+        [Tooltip("当此模式打开后程序将不会进入休眠状态")]
+        public bool screenNeverSleep = false;
+
+        // ----------------------------------------------------------------------------------------------------
+        [Header("应用程序日志设置")]
+
+        [Tooltip("日志通道开启的类型组合，可以同时开启多种不同类型的通道用于日志输出")]
+        public LogChannelType[] logChannel = null;
+
+        [FieldLabelName("日志使用自定义颜色")]
+        [Tooltip("日志文本颜色使用自定义设置，具体颜色值请参考编辑窗口定义")]
+        public bool logUsingCustomColor = false;
+
+        [FieldLabelName("日志使用系统颜色")]
+        [Tooltip("日志文本颜色使用系统设置，具体颜色值请参考编辑窗口定义")]
+        public bool logUsingSystemColor = false;
+
+        // ----------------------------------------------------------------------------------------------------
+        [Header("应用程序教程设置")]
+
+        [FieldLabelName("教程模式")]
+        [Tooltip("当此模式打开后，程序将跳转到演示案例环境下进行启动")]
+        public bool tutorialMode = false;
+
+        [FieldLabelName("教程案例")]
+        [Tooltip("通过选择教程示例，程序运行后将在对应的案例环境下进行启动")]
+        public TutorialSampleType tutorialSampleType = TutorialSampleType.Unknown;
+
+        /// <summary>
+        /// AppConfigures示例
+        /// </summary>
+        public static AppConfigures Instance
+        {
+            get
+            {
+                AppConfigures configures = Resources.Load<AppConfigures>(nameof(AppConfigures));
+                if (configures == null)
+                {
+                    configures = CreateInstance<AppConfigures>();
+                    Logger.Error("Could not found any AppConfigures assets, please create one instance in resources directory.");
+                }
+
+                return configures;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 日志输出通道设置，你可以设置以下类型：<br/>
+    /// 1 - 控制台<br/>
+    /// 2 - 编辑器<br/>
+    /// 4 - 视图窗口<br/>
+    /// 8 - 本地文件<br/>
+    /// 若需要同时对多个类型的通道进行输出，则可以将多个类型或操作后的值设置到该参数上<br/>
+    /// 例如，需要同时开启“控制台”和“本地文件”，则可以将该参数设置为：9<br/>
+    /// 需要特别声明，编辑器模式仅在编辑器环境下生效，非编辑器环境该标识将自动清除<br/>
+    /// <br/>
+    /// 这里需要注意，如果设置了本地文件选项，建议同步配置本地文件的存放路径及文件名称<br/>
+    /// 如果没有配置名称，则默认使用临时目录下，以应用程序+“_log”作为日志文件的名称
+    /// </summary>
+    public enum LogChannelType : int
+    {
+        [Header("无效")]
+        Unknown = 0,
+
+        [Header("控制台")]
+        Console = 1,
+
+        [Header("编辑器")]
+        Editor = 2,
+
+        [Header("视图窗口")]
+        Window = 4,
+
+        [Header("本地文件")]
+        File = 8,
+    }
+
+    /// <summary>
+    /// 教程示例的类型定义
+    /// </summary>
+    public enum TutorialSampleType : int
+    {
+        [Header("无效")]
+        Unknown = 0,
+
+        [Header("文本格式化")]
+        TextFormat,
+
+        [Header("符号解析")]
+        SymbolParser,
+
+        [Header("构建动态调用")]
+        DynamicInvokeGenerator,
+
+        [Header("控制反转")]
+        InversionOfControl,
+
+        [Header("对象生命周期")]
+        ObjectLifecycle,
+
+        [Header("转发通知")]
+        DispatchCall,
+
+        [Header("依赖注入")]
+        DependencyInject,
+
+        [Header("性能分析")]
+        PerformanceAnalysis,
+    }
+}
