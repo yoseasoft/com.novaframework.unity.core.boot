@@ -71,17 +71,17 @@ namespace CoreEngine
                 return;
             }
 
-            StartAsync().Forget();
+            StartAsync();
         }
 
         /// <summary>
         /// 运行启动流程
         /// </summary>
-        static async UniTaskVoid StartAsync()
+        static void StartAsync()
         {
-            await AssetManagement.InitAsync().Task;
+            AssetManagement.Init();
 
-            await LoadAssembliesAsync();
+            LoadAssembliesAsync();
 
             StartEngine();
         }
@@ -89,7 +89,7 @@ namespace CoreEngine
         /// <summary>
         /// 异步加载程序集
         /// </summary>
-        static async UniTask LoadAssembliesAsync()
+        static async void LoadAssembliesAsync()
         {
             await LoadMetadataAsync();
 
