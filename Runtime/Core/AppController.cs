@@ -43,8 +43,6 @@ namespace CoreEngine
         void Awake()
         {
             DontDestroyOnLoad(this);
-
-            GooAsset.AssetManagement.Startup();
         }
 
         void Start()
@@ -54,8 +52,6 @@ namespace CoreEngine
 
         void Update()
         {
-            GooAsset.AssetManagement.Update();
-
             onUpdate?.Invoke();
         }
 
@@ -67,8 +63,6 @@ namespace CoreEngine
         void OnDestroy()
         {
             onDestroy?.Invoke();
-
-            GooAsset.AssetManagement.Shutdown();
         }
 
         void OnApplicationFocus(bool focus)

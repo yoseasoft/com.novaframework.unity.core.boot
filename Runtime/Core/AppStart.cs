@@ -23,14 +23,15 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-using System;
-using UnityEngine;
 using System.Linq;
 using System.Reflection;
-using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 using GooAsset;
+
+using SystemType = System.Type;
 
 namespace CoreEngine
 {
@@ -71,17 +72,18 @@ namespace CoreEngine
                 return;
             }
 
-            StartAsync();
+            StartAsync().Forget();
         }
 
         /// <summary>
         /// 运行启动流程
         /// </summary>
-        static void StartAsync()
+        static async UniTaskVoid StartAsync()
         {
-            AssetManagement.Init();
+            // 资源管理初始化
+            await AssetManagement.InitAsync().Task;
 
-            LoadAssembliesAsync();
+            await LoadAssembliesAsync();
 
             StartEngine();
         }
@@ -89,7 +91,7 @@ namespace CoreEngine
         /// <summary>
         /// 异步加载程序集
         /// </summary>
-        static async void LoadAssembliesAsync()
+        static async UniTask LoadAssembliesAsync()
         {
             await LoadMetadataAsync();
 
@@ -108,7 +110,7 @@ namespace CoreEngine
         static void StartEngine()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
-            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (assemblyType is null)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
@@ -131,7 +133,7 @@ namespace CoreEngine
         static void ReloadEngine()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
-            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (assemblyType is null)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
@@ -146,7 +148,7 @@ namespace CoreEngine
         public static void ReloadAssets(int type)
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
-            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (assemblyType is null)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
