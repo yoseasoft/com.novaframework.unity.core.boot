@@ -1,4 +1,4 @@
-﻿## NovaFramework - Unity 核心库
+## NovaFramework - Unity 核心库
 
 NovaFramework的启动库，提供程序启动相关的功能接口。
 
