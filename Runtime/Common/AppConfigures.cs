@@ -144,6 +144,9 @@ namespace CoreEngine
         [Header("转发通知")]
         DispatchCall,
 
+        [Header("状态转换")]
+        StateTransition,
+
         [Header("依赖注入")]
         DependencyInject,
 
