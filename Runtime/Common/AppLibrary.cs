@@ -37,6 +37,10 @@ namespace CoreEngine
         /// </summary>
         static IList<string> _assemblyNames = null;
         /// <summary>
+        /// 可加载程序集名称列表
+        /// </summary>
+        static IList<string> _loadableAssemblyNames = null;
+        /// <summary>
         /// 可重载程序集名称列表
         /// </summary>
         static IList<string> _reloadableAssemblyNames = null;
@@ -64,6 +68,31 @@ namespace CoreEngine
             }
 
             return _assemblyNames;
+        }
+
+        /// <summary>
+        /// 获取当前系统注册的全部可加载程序集名称
+        /// </summary>
+        /// <returns>返回全部可加载程序集的名称列表</returns>
+        public static IList<string> GetAllLoadableAssemblyNames()
+        {
+            if (null == _loadableAssemblyNames)
+            {
+                _loadableAssemblyNames = DynamicLibrary.GetAllAssemblyNames((info) =>
+                {
+                    // 跳过内核或插件库
+                    if (false == info.IsContainsTag(LibraryTag.Game))
+                        return false;
+
+                    // 教程相关程序模块的过滤
+                    if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                        return false;
+
+                    return true;
+                });
+            }
+
+            return _loadableAssemblyNames;
         }
 
         /// <summary>

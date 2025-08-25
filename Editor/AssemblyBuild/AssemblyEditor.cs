@@ -146,7 +146,9 @@ namespace CoreEngine.Editor
             foreach (string dll in assemblyNames)
             {
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载, 故此处不进行屏蔽
-                if (dll is AppStart.AgenDllName)
+                CoreEngine.LibraryInfo info = CoreEngine.DynamicLibrary.GetLibraryInfoByAssemblyName(dll);
+                // if (dll is AppStart.AgenDllName)
+                if (info.IsContainsTag(CoreEngine.LibraryTag.Shared))
                 {
                     continue;
                 }

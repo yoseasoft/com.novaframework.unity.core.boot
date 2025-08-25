@@ -43,7 +43,7 @@ namespace CoreEngine
         /// <summary>
         /// 配置、协议库名
         /// </summary>
-        public const string AgenDllName = "Agen";
+        // public const string AgenDllName = "Agen";
 
         /// <summary>
         /// 名字对应的程序集
@@ -227,7 +227,9 @@ namespace CoreEngine
             {
 #if UNITY_EDITOR
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载
-                if (dllName == AgenDllName)
+                CoreEngine.LibraryInfo info = CoreEngine.DynamicLibrary.GetLibraryInfoByAssemblyName(dllName);
+                // if (dllName == AgenDllName)
+                if (info.IsContainsTag(CoreEngine.LibraryTag.Shared))
                 {
                     _name2Assembly.Add(dllName, Assembly.Load(dllName));
                     continue;
