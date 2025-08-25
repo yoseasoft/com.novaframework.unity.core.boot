@@ -56,7 +56,7 @@ namespace CoreEngine
                 _assemblyNames = DynamicLibrary.GetAllAssemblyNames((info) =>
                 {
                     // 教程相关程序模块的过滤
-                    if (!AppConfigures.Instance.tutorialMode && info.tutorial)
+                    if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
                         return false;
 
                     return true;
@@ -76,7 +76,7 @@ namespace CoreEngine
             {
                 _reloadableAssemblyNames = DynamicLibrary.GetAllReloadableAssemblyNames((info) =>
                 {
-                    if (!AppConfigures.Instance.tutorialMode && info.tutorial)
+                    if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
                         return false;
 
                     return true;
