@@ -150,6 +150,9 @@ namespace CoreEngine
         [Header("依赖注入")]
         DependencyInject,
 
+        [Header("配置表达式")]
+        ConfigureExpression,
+
         [Header("性能分析")]
         PerformanceAnalysis,
     }
