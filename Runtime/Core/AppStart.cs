@@ -142,10 +142,10 @@ namespace CoreEngine
 
             assemblyType.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { _name2Assembly, true });
 
-            assemblyType.GetMethod("Reload", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, null);
+            assemblyType.GetMethod("Reload", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { 1 });
         }
 
-        public static void ReloadAssets(int type)
+        public static void ReloadConfigure()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
             SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
@@ -157,7 +157,7 @@ namespace CoreEngine
 
             assemblyType.GetMethod("OnAssemblyLoaded", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { _name2Assembly, true });
 
-            assemblyType.GetMethod("Reimport", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { type });
+            assemblyType.GetMethod("Reload", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { 2 });
         }
 
         /// <summary>
