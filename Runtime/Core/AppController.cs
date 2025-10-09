@@ -31,8 +31,6 @@ namespace CoreEngine
     public class AppController : UnityEngine.MonoBehaviour
     {
         private System.Action onStart;
-        private System.Action onExecute;
-        private System.Action onLateExecute;
         private System.Action onUpdate;
         private System.Action onLateUpdate;
         private System.Action onDestroy;
