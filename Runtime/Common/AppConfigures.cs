@@ -43,6 +43,14 @@ namespace CoreEngine
         [Tooltip("当此模式打开后程序将不会进入休眠状态")]
         public bool screenNeverSleep = false;
 
+        [EnumLabelName("网络协议序列化类型")]
+        [Tooltip("应用程序网络通信的协议序列化类型设置，必须设置该选项后才可以进行网络连接")]
+        public ProtocolSerializationType protocolSerializationType = ProtocolSerializationType.Unknown;
+
+        [EnumLabelName("窗口表单系统类型")]
+        [Tooltip("应用程序视图窗口的表单系统类型设置，必须设置该选项后才可以进行视图窗口的表单构建操作")]
+        public FormSystemType formSystemType = FormSystemType.Unknown;
+
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序日志设置")]
 
@@ -88,6 +96,42 @@ namespace CoreEngine
     }
 
     /// <summary>
+    /// 网络协议序列化类型的枚举定义
+    /// </summary>
+    public enum ProtocolSerializationType : byte
+    {
+        [Header("未知")]
+        Unknown = 0,
+
+        [Header("Protobuf")]
+        Protobuf = 1,
+
+        [Header("Message Pack")]
+        MessagePack = 2,
+
+        [Header("Memory Pack")]
+        MemoryPack = 3,
+    }
+
+    /// <summary>
+    /// 视图窗口表单系统类型的枚举定义
+    /// </summary>
+    public enum FormSystemType : byte
+    {
+        [Header("未知")]
+        Unknown = 0,
+
+        [Header("UGui")]
+        UGui = 1,
+
+        [Header("Fairy Gui")]
+        FairyGui = 2,
+
+        [Header("UI Toolkit")]
+        UIToolkit = 4,
+    }
+
+    /// <summary>
     /// 日志输出通道设置，你可以设置以下类型：<br/>
     /// 1 - 控制台<br/>
     /// 2 - 编辑器<br/>
@@ -102,7 +146,7 @@ namespace CoreEngine
     /// </summary>
     public enum LogChannelType : int
     {
-        [Header("无效")]
+        [Header("未知")]
         Unknown = 0,
 
         [Header("控制台")]
@@ -123,7 +167,7 @@ namespace CoreEngine
     /// </summary>
     public enum TutorialSampleType : int
     {
-        [Header("无效")]
+        [Header("未知")]
         Unknown = 0,
 
         [Header("文本格式化")]

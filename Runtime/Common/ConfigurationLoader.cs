@@ -81,6 +81,8 @@ namespace CoreEngine
 
             // 运行设置
             vars.Add(nameof(configures.screenNeverSleep), configures.screenNeverSleep.ToString());
+            vars.Add(nameof(configures.protocolSerializationType), ((int) configures.protocolSerializationType).ToString());
+            vars.Add(nameof(configures.formSystemType), ((int) configures.formSystemType).ToString());
 
             // 日志设置
             int logChannel = 0;
