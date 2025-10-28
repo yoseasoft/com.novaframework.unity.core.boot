@@ -174,7 +174,7 @@ namespace CoreEngine
             var dllAssets = new Asset[aotDllNames.Count];
             for (int i = 0; i < aotDllNames.Count; i++)
             {
-                string filePath = SystemPath.GetFilePath(ResourcePathType.MonoAotPath, Utility.Platform.CurrentPlatformName, $"{aotDllNames[i]}.bytes");
+                string filePath = SystemPath.GetFilePath(ResourcePathType.AotLibraryPath, Utility.Platform.CurrentPlatformName, $"{aotDllNames[i]}.bytes");
                 var asset = AssetManagement.LoadAssetAsync(filePath, typeof(TextAsset));
                 dllAssets[i] = asset;
             }

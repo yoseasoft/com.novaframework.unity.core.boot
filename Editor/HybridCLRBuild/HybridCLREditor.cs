@@ -44,7 +44,7 @@ namespace CoreEngine.Editor
         public static void CopyAotDlls()
         {
             string fromDir = Path.Combine(HybridCLRSettings.Instance.strippedAOTDllOutputRootDir, EditorUserBuildSettings.activeBuildTarget.ToString());
-            string toDir = Path.Combine(SystemPath.GetPath(ResourcePathType.MonoAotPath), Utility.Platform.CurrentPlatformName);
+            string toDir = Path.Combine(SystemPath.GetPath(ResourcePathType.AotLibraryPath), Utility.Platform.CurrentPlatformName);
 
             if (Directory.Exists(toDir))
             {
