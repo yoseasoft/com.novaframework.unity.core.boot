@@ -47,7 +47,19 @@ namespace CoreEngine
         [Tooltip("应用程序网络通信的协议序列化类型设置，必须设置该选项后才可以进行网络连接")]
         public ProtocolSerializationType protocolSerializationType = ProtocolSerializationType.Unknown;
 
-        [EnumLabelName("窗口表单系统类型")]
+        [FieldLabelName("UGui窗口支持")]
+        [Tooltip("当此模式打开后程序将支持加载UGui框架制作的视图窗口")]
+        public bool unityFormSupported = false;
+
+        [FieldLabelName("FairyGui窗口支持")]
+        [Tooltip("当此模式打开后程序将支持加载FairyGui框架制作的视图窗口")]
+        public bool fairyFormSupported = false;
+
+        [FieldLabelName("UIToolkit窗口支持")]
+        [Tooltip("当此模式打开后程序将支持加载UIToolkit框架制作的视图窗口")]
+        public bool toolkitFormSupported = false;
+
+        [EnumLabelName("窗口表单系统默认类型")]
         [Tooltip("应用程序视图窗口的表单系统类型设置，必须设置该选项后才可以进行视图窗口的表单构建操作")]
         public FormSystemType formSystemType = FormSystemType.Unknown;
 
