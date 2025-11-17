@@ -39,29 +39,17 @@ namespace CoreEngine
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序运行设置")]
 
+        [FieldLabelName("游戏入口")]
+        [Tooltip("应用程序业务层入口，必须填写该名称后才可以正常启动业务逻辑")]
+        public string gameEntryName = null;
+
         [FieldLabelName("休眠模式")]
         [Tooltip("当此模式打开后程序将不会进入休眠状态")]
         public bool screenNeverSleep = false;
 
-        [EnumLabelName("网络协议序列化类型")]
-        [Tooltip("应用程序网络通信的协议序列化类型设置，必须设置该选项后才可以进行网络连接")]
-        public ProtocolSerializationType protocolSerializationType = ProtocolSerializationType.Unknown;
-
-        [FieldLabelName("UGui窗口支持")]
-        [Tooltip("当此模式打开后程序将支持加载UGui框架制作的视图窗口")]
-        public bool unityFormSupported = false;
-
-        [FieldLabelName("FairyGui窗口支持")]
-        [Tooltip("当此模式打开后程序将支持加载FairyGui框架制作的视图窗口")]
-        public bool fairyFormSupported = false;
-
-        [FieldLabelName("UIToolkit窗口支持")]
-        [Tooltip("当此模式打开后程序将支持加载UIToolkit框架制作的视图窗口")]
-        public bool toolkitFormSupported = false;
-
-        [EnumLabelName("窗口表单系统默认类型")]
-        [Tooltip("应用程序视图窗口的表单系统类型设置，必须设置该选项后才可以进行视图窗口的表单构建操作")]
-        public FormSystemType formSystemType = FormSystemType.Unknown;
+        [EnumLabelName("网络消息包头长度")]
+        [Tooltip("应用程序网络通信的消息包头长度设置，必须设置该选项后才可以进行网络通信")]
+        public NetworkMessageHeaderSizeType networkMessageHeaderSize = NetworkMessageHeaderSizeType.Unknown;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序日志设置")]
@@ -108,39 +96,18 @@ namespace CoreEngine
     }
 
     /// <summary>
-    /// 网络协议序列化类型的枚举定义
+    /// 网络消息包头长度类型的枚举定义
     /// </summary>
-    public enum ProtocolSerializationType : byte
+    public enum NetworkMessageHeaderSizeType : byte
     {
         [Header("未知")]
         Unknown = 0,
 
-        [Header("Protobuf")]
-        Protobuf = 1,
+        [Header("2字节")]
+        Header2 = 2,
 
-        [Header("Message Pack")]
-        MessagePack = 2,
-
-        [Header("Memory Pack")]
-        MemoryPack = 3,
-    }
-
-    /// <summary>
-    /// 视图窗口表单系统类型的枚举定义
-    /// </summary>
-    public enum FormSystemType : byte
-    {
-        [Header("未知")]
-        Unknown = 0,
-
-        [Header("UGui")]
-        UGui = 1,
-
-        [Header("Fairy Gui")]
-        FairyGui = 2,
-
-        [Header("UI Toolkit")]
-        UIToolkit = 4,
+        [Header("4字节")]
+        Header4 = 4,
     }
 
     /// <summary>

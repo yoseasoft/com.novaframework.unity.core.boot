@@ -80,12 +80,9 @@ namespace CoreEngine
             AppConfigures configures = AppConfigures.Instance;
 
             // 运行设置
+            vars.Add(nameof(configures.gameEntryName), configures.gameEntryName.ToString());
             vars.Add(nameof(configures.screenNeverSleep), configures.screenNeverSleep.ToString());
-            vars.Add(nameof(configures.protocolSerializationType), ((int) configures.protocolSerializationType).ToString());
-            vars.Add(nameof(configures.unityFormSupported), configures.unityFormSupported.ToString());
-            vars.Add(nameof(configures.fairyFormSupported), configures.fairyFormSupported.ToString());
-            vars.Add(nameof(configures.toolkitFormSupported), configures.toolkitFormSupported.ToString());
-            vars.Add(nameof(configures.formSystemType), ((int) configures.formSystemType).ToString());
+            vars.Add(nameof(configures.networkMessageHeaderSize), ((int) configures.networkMessageHeaderSize).ToString());
 
             // 日志设置
             int logChannel = 0;
