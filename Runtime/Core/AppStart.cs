@@ -67,8 +67,9 @@ namespace CoreEngine
         static void Start()
         {
             // Main场景才运行
-            if (false == UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToLower().Equals(AppDefine.AppControllerSceneName))
+            if (false == Utils.IsEmptyScene() || false == Utils.IsActiveSceneName(AppDefine.AppControllerSceneName))
             {
+                Logger.Error("当前运行环境必须为空场景，且场景名称需要定义为‘{0}’！", AppDefine.AppControllerSceneName);
                 return;
             }
 
