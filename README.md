@@ -1,6 +1,9 @@
-## NovaFramework - Unity 核心库
+## NovaFramework - Unity 启动库
 
-NovaFramework的启动库，提供程序启动相关的功能接口。
+NovaFramework的启动库，提供程序启动的标准流程。  
+如果您需要定制个性化的启动流程，可以参考该库中驱动引擎的具体操作方式，并自行扩展前后的自定义逻辑。  
+
+关于更多引擎介绍，请前往[NovaFramework](https://github.com/yoseasoft/NovaFramework)查看。
 
 ## 使用文档
 
