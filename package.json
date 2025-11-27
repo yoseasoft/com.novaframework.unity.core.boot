@@ -19,6 +19,7 @@
   },
   "relatedPackages": {},
   "dependencies": {
-    "com.unity.modules.assetbundle": "1.0.0"
+    "com.unity.modules.assetbundle": "1.0.0",
+    "com.novaframework.unity.core.configure": "1.0.0"
   }
 }
