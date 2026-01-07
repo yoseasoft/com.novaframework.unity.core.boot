@@ -103,9 +103,12 @@ namespace CoreEngine
         {
             if (null == _reloadableAssemblyNames)
             {
-                _reloadableAssemblyNames = DynamicLibrary.GetAllReloadableAssemblyNames((info) =>
+                _reloadableAssemblyNames = DynamicLibrary.GetAllPlayableAssemblyNames((info) =>
                 {
                     if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                        return false;
+
+                    if (!info.IsContainsTag(LibraryTag.Hotfix))
                         return false;
 
                     return true;
