@@ -23,15 +23,20 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+#define USE_WEBGL_RUNTIME_CONTEXT
+#else
+#define USE_HYBRIDCLR_RUNTIME_CONTEXT
+#endif
+
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
-using UnityEngine;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 using GooAsset;
-
-using SystemType = System.Type;
 
 namespace CoreEngine
 {
@@ -94,6 +99,10 @@ namespace CoreEngine
         /// </summary>
         static async UniTask LoadAssembliesAsync()
         {
+#if USE_WEBGL_RUNTIME_CONTEXT
+            await UniTask.WaitForSeconds(1);
+            LoadAssembliesFromCurrentDomain();
+#elif USE_HYBRIDCLR_RUNTIME_CONTEXT
             await LoadMetadataAsync();
 
             if (Application.isEditor && !AppSettings.Instance.dylinkMode)
@@ -103,6 +112,7 @@ namespace CoreEngine
             }
 
             await LoadAssembliesFromAssetsAsync();
+#endif
         }
 
         /// <summary>
@@ -111,7 +121,7 @@ namespace CoreEngine
         static void StartEngine()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
-            SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (assemblyType is null)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
@@ -134,7 +144,7 @@ namespace CoreEngine
         static void ReloadEngine()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
-            SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (assemblyType is null)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
@@ -149,7 +159,7 @@ namespace CoreEngine
         public static void ReloadConfigure()
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
-            SystemType assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
+            Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (assemblyType is null)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
@@ -161,6 +171,7 @@ namespace CoreEngine
             assemblyType.GetMethod("Reload", BindingFlags.Static | BindingFlags.Public)?.Invoke(null, new object[] { 2 });
         }
 
+#if USE_HYBRIDCLR_RUNTIME_CONTEXT
         /// <summary>
         /// 异步补充元数据
         /// </summary>
@@ -247,6 +258,7 @@ namespace CoreEngine
                 asset.Release();
             }
         }
+#endif
 
         /// <summary>
         /// 重载所有程序集并进行通知
@@ -279,5 +291,27 @@ namespace CoreEngine
                 _name2Assembly[assemblyName] = Assembly.Load(dllBytes, pdbBytes);
             }
         }
+
+#if USE_WEBGL_RUNTIME_CONTEXT
+        /// <summary>
+        /// 从当前运行环境加载Dll
+        /// </summary>
+        static void LoadAssembliesFromCurrentDomain()
+        {
+            // WebGL中，程序集已经编译到WebAssembly中
+            // 只需要从当前域获取已加载的程序集
+            Assembly[] allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            // 手动添加需要的程序集
+            foreach (Assembly assembly in allAssemblies)
+            {
+                string simpleName = assembly.GetName().Name;
+                if (!_name2Assembly.ContainsKey(simpleName))
+                {
+                    _name2Assembly.Add(simpleName, assembly);
+                }
+            }
+        }
+#endif
     }
 }
