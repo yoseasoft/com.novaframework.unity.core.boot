@@ -89,9 +89,28 @@ namespace CoreEngine
             // 资源管理初始化
             await AssetManagement.InitAsync().Task;
 
+            InitRuntimeEnvironments();
+
             await LoadAssembliesAsync();
 
             StartEngine();
+        }
+
+        /// <summary>
+        /// 初始化运行时环境
+        /// </summary>
+        static void InitRuntimeEnvironments()
+        {
+            TextAsset textAsset = Resources.Load<TextAsset>("system_environments");
+            if (null == textAsset)
+            {
+                Debug.LogError("加载系统环境配置文件失败！");
+                return;
+            }
+
+            AssemblyDefinitionObjectWrapper assemblyDefinitionObjectWrapper = JsonUtility.FromJson<AssemblyDefinitionObjectWrapper>(textAsset.text);
+            assemblyDefinitionObjectWrapper.AutoRegisterDatas();
+            Resources.UnloadAsset(textAsset);
         }
 
         /// <summary>
@@ -122,7 +141,7 @@ namespace CoreEngine
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
-            if (assemblyType is null)
+            if (null == assemblyType)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
@@ -145,7 +164,7 @@ namespace CoreEngine
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
-            if (assemblyType is null)
+            if (null == assemblyType)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
@@ -160,7 +179,7 @@ namespace CoreEngine
         {
             Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
-            if (assemblyType is null)
+            if (null == assemblyType)
             {
                 Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;

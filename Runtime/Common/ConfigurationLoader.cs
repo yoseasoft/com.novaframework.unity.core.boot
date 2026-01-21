@@ -24,6 +24,7 @@
 /// -------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.IO;
 
 using Cysharp.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace CoreEngine
     internal static class ConfigurationLoader
     {
         /// <summary>
-        /// 加载环境配置的设置信息
+        /// 加载应用配置的设置信息
         /// </summary>
         // public static async UniTask<IReadOnlyDictionary<string, string>> LoadEnvironmentSettings()
         public static IReadOnlyDictionary<string, string> LoadEnvironmentSettings()
@@ -126,7 +127,7 @@ namespace CoreEngine
         /// <param name="variables">环境参数集合</param>
         private static async UniTask LoadConfigureSettingsVariables(IDictionary<string, string> variables)
         {
-            string text = null;
+            string text;
 
             text = await LoadConfigureFileFromStreamAssetPath("Settings/app_conf.properties");
             if (false == ResolvePropertiesInfoFromText(text, variables))
@@ -155,7 +156,7 @@ namespace CoreEngine
             else
                 localProtocol = "file://";
 
-            string configureFilePath = localProtocol + System.IO.Path.Combine(UnityEngine.Application.streamingAssetsPath, path);
+            string configureFilePath = localProtocol + Path.Combine(UnityEngine.Application.streamingAssetsPath, path);
             UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.Get(configureFilePath);
             await request.SendWebRequest();
             if (request.result != UnityEngine.Networking.UnityWebRequest.Result.Success)
@@ -177,8 +178,8 @@ namespace CoreEngine
         {
             Logger.Assert(null != variables);
 
-            string line = null;
-            System.IO.StringReader reader = new System.IO.StringReader(text);
+            string line;
+            StringReader reader = new StringReader(text);
             while (null != (line = reader.ReadLine()))
             {
                 // 截掉空白字符
