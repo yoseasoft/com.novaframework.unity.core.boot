@@ -104,7 +104,7 @@ namespace CoreEngine
             TextAsset textAsset = Resources.Load<TextAsset>("system_environments");
             if (null == textAsset)
             {
-                Debug.LogError("加载系统环境配置文件失败！");
+                Logger.Error("加载系统环境配置文件失败！");
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace CoreEngine
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (null == assemblyType)
             {
-                Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
+                Logger.Error($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
             }
 
@@ -166,7 +166,7 @@ namespace CoreEngine
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (null == assemblyType)
             {
-                Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
+                Logger.Error($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
             }
 
@@ -181,7 +181,7 @@ namespace CoreEngine
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (null == assemblyType)
             {
-                Debug.LogError($"加载Type:{AppDefine.AppControllerClassName}失败");
+                Logger.Error($"加载Type:{AppDefine.AppControllerClassName}失败");
                 return;
             }
 
@@ -217,7 +217,7 @@ namespace CoreEngine
                 HybridCLR.RuntimeApi.LoadMetadataForAOTAssembly(assBytes, HybridCLR.HomologousImageMode.SuperSet);
                 asset.Release();
             }
-            Debug.Log($"补元数加载完成  ======  aot dll load  ---- count:{dllAssets.Length}");
+            Logger.Info($"补元数加载完成  ======  aot dll load  ---- count:{dllAssets.Length}");
         }
 
         /// <summary>

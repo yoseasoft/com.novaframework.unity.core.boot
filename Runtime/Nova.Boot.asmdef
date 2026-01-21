@@ -4,6 +4,7 @@
     "references": [
         "HybridCLR.Runtime",
         "GooAsset",
+        "Nova.Common",
         "Nova.Configure",
         "Nova.UniTask"
     ],

@@ -6,8 +6,9 @@
         "HybridCLR.Editor",
         "GooAsset",
         "Nova.Boot",
+        "Nova.Common",
+        "Nova.Common.Editor",
         "Nova.Configure",
-        "Nova.Configure.Editor",
         "Nova.UniTask"
     ],
     "includePlatforms": [

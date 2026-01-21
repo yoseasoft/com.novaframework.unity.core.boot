@@ -45,17 +45,17 @@ namespace CoreEngine
             {
                 vars.Add(environmentVariableObject.key, environmentVariableObject.value);
             }
-            CoreEngine.SystemVariables.SetValue(vars);
+            SystemVariables.SetValue(vars);
 
             for (int n = 0; n < modules.Count; ++n)
             {
                 AssemblyDefinitionObject module = modules[n];
-                CoreEngine.DynamicLibrary.RegisterLibraryInfo(module.order, module.name, module.tags);
+                DynamicLibrary.RegisterLibraryInfo(module.order, module.name, module.tags);
             }
 
             for (int n = 0; n < aot_libraries.Count; ++n)
             {
-                CoreEngine.DynamicLibrary.RegisterAotLibraryName(aot_libraries[n]);
+                DynamicLibrary.RegisterAotLibraryName(aot_libraries[n]);
             }
         }
 
