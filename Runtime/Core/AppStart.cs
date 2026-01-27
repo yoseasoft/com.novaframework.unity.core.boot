@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
@@ -38,7 +36,7 @@ using UnityEngine;
 
 using GooAsset;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 应用程序启动流程管理类，用于对应用程序启动流程及脚本加载提供接口函数
@@ -258,9 +256,9 @@ namespace CoreEngine
             {
 #if UNITY_EDITOR
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载
-                CoreEngine.LibraryInfo info = CoreEngine.DynamicLibrary.GetLibraryInfoByAssemblyName(dllName);
+                LibraryInfo info = DynamicLibrary.GetLibraryInfoByAssemblyName(dllName);
                 // if (dllName == AgenDllName)
-                if (info.IsContainsTag(CoreEngine.LibraryTag.Shared))
+                if (info.IsContainsTag(LibraryTag.Shared))
                 {
                     _name2Assembly.Add(dllName, Assembly.Load(dllName));
                     continue;

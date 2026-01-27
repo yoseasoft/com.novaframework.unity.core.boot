@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2017 - 2020, Shanghai Tommon Network Technology Co., Ltd.
 /// Copyright (C) 2020 - 2022, Guangzhou Xinyuan Technology Co., Ltd.
 /// Copyright (C) 2022 - 2023, Shanghai Bilibili Technology Co., Ltd.
@@ -30,7 +28,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 应用程序的基础配置，用于应用正式启动的参数设置

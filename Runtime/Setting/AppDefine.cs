@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
@@ -23,7 +21,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 应用程序常量设置类，用于统一管理当前模块中所需要用到的常量定义

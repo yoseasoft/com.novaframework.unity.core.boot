@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Editor Framework
-///
 /// Copyright (C) 2023 - 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2024 - 2025, Hurley, Independent Studio.
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
@@ -31,7 +29,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace CoreEngine.Editor
+namespace NovaFramework.Editor
 {
     static class AssemblyEditor
     {
@@ -146,9 +144,9 @@ namespace CoreEngine.Editor
             foreach (string dll in assemblyNames)
             {
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载, 故此处不进行屏蔽
-                CoreEngine.LibraryInfo info = CoreEngine.DynamicLibrary.GetLibraryInfoByAssemblyName(dll);
+                LibraryInfo info = DynamicLibrary.GetLibraryInfoByAssemblyName(dll);
                 // if (dll is AppStart.AgenDllName)
-                if (info.IsContainsTag(CoreEngine.LibraryTag.Shared))
+                if (info.IsContainsTag(LibraryTag.Shared))
                 {
                     continue;
                 }

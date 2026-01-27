@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
@@ -28,7 +26,7 @@ using System.IO;
 
 using Cysharp.Threading.Tasks;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 程序配置加载器类，用于对程启动所需的相关配置参数进行统一加载管理

@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Editor Framework
-///
 /// Copyright (C) 2025, Hurley, Independent Studio.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +20,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-namespace CoreEngine.Editor
+namespace NovaFramework.Editor
 {
     /// <summary>
     /// 编辑器配置参数管理类，用于记录编辑环境下的参数设置

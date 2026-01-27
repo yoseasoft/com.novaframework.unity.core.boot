@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2025, Hurley, Independent Studio.
 ///
@@ -25,7 +23,7 @@
 
 using GooAsset;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 程序加密/解密逻辑接口类，用于对程序内部数据进行加密/解密处理

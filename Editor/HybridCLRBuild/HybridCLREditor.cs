@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Editor Framework
-///
 /// Copyright (C) 2023 - 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2024 - 2025, Hurley, Independent Studio.
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
@@ -31,7 +29,7 @@ using UnityEditor;
 using HybridCLR.Editor.Settings;
 using GooAsset;
 
-namespace CoreEngine.Editor
+namespace NovaFramework.Editor
 {
     /// <summary>
     /// HybridCLR工具类

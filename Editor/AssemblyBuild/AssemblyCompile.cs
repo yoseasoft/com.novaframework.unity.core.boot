@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Editor Framework
-///
 /// Copyright (C) 2023 - 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2024 - 2025, Hurley, Independent Studio.
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
@@ -24,6 +22,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,9 +32,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build.Player;
 
-using SystemDateTime = System.DateTime;
-
-namespace CoreEngine.Editor
+namespace NovaFramework.Editor
 {
     public static class AssemblyCompile
     {
@@ -145,7 +142,7 @@ namespace CoreEngine.Editor
         /// </summary>
         public static void CompileDlls()
         {
-            string compileTimeStr = SystemDateTime.Now.Ticks.ToString();
+            string compileTimeStr = DateTime.Now.Ticks.ToString();
 
             IList<string> hotfixDllNames = AppLibrary.GetAllReloadableAssemblyNames();
 

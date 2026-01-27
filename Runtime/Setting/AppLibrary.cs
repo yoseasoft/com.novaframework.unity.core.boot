@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 /// Copyright (C) 2025, Hurley, Independent Studio.
 ///
@@ -25,7 +23,7 @@
 
 using System.Collections.Generic;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 程序库接口类，用于对程序启动所需的模块进行定义及加载管理

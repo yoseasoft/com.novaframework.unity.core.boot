@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2023 - 2024, Guangzhou Shiyue Network Technology Co., Ltd.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +20,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 生命周期总入口

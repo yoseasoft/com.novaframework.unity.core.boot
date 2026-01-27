@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2025, Hurley, Independent Studio.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,7 +30,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 字段名称标签的属性定义

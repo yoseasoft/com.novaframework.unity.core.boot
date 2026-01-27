@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,7 +22,7 @@
 
 using UnityEngine.SceneManagement;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 辅助工具接口类，用于提供一些辅助工具方法

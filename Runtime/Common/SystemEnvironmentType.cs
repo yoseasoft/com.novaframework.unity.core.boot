@@ -1,6 +1,4 @@
 /// -------------------------------------------------------------------------------
-/// CoreEngine Framework
-///
 /// Copyright (C) 2025 - 2026, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoreEngine
+namespace NovaFramework
 {
     /// <summary>
     /// 程序集定义数据模型容器类
