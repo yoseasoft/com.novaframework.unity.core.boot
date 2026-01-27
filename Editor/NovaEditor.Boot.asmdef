@@ -5,11 +5,11 @@
         "HybridCLR.Runtime",
         "HybridCLR.Editor",
         "GooAsset",
-        "NovaEditor.Common",
+        "NovaFramework.UniTask",
         "NovaFramework.Boot",
         "NovaFramework.Common",
         "NovaFramework.Configure",
-        "Nova.UniTask"
+        "NovaEditor.Common"
     ],
     "includePlatforms": [
         "Editor"

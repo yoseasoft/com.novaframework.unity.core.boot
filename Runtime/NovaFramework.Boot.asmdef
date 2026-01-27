@@ -4,9 +4,9 @@
     "references": [
         "HybridCLR.Runtime",
         "GooAsset",
+        "NovaFramework.UniTask",
         "NovaFramework.Common",
-        "NovaFramework.Configure",
-        "Nova.UniTask"
+        "NovaFramework.Configure"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
