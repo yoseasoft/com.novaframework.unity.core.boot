@@ -24,4 +24,4 @@
 using System.Runtime.CompilerServices;
 
 // 外部友元
-[assembly: InternalsVisibleTo("Nova.Boot.Editor")]
+[assembly: InternalsVisibleTo("NovaEditor.Boot")]
