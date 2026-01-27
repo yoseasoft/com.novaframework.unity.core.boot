@@ -1,25 +1,26 @@
 {
-    "name": "Nova.Boot.Editor",
+    "name": "NovaFramework.Boot",
     "rootNamespace": "",
     "references": [
         "HybridCLR.Runtime",
-        "HybridCLR.Editor",
         "GooAsset",
-        "Nova.Boot",
-        "Nova.Common",
-        "Nova.Common.Editor",
-        "Nova.Configure",
+        "NovaFramework.Common",
+        "NovaFramework.Configure",
         "Nova.UniTask"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.code-philosophy.hybridclr",
+            "expression": "",
+            "define": "NOVA_HYBRIDCLR_SUPPORT"
+        }
+    ],
     "noEngineReferences": false
 }
