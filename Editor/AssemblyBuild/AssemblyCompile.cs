@@ -124,7 +124,7 @@ namespace NovaFramework.Editor
         /// <returns>返回源码目录地址</returns>
         static string GetSourceCodePathByAssemblyName(string assemblyName)
         {
-            return Path.Combine(SystemPath.GetPath(ResourcePathType.SourceCodePath), assemblyName);
+            return Path.Combine(EnvironmentPath.GetPath(ResourcePathType.SourceCodePath), assemblyName);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace NovaFramework.Editor
             }
 
             // 获取最新的编译文件修改时间视为最后编译时间
-            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
+            string libraryPath = EnvironmentPath.GetPath(ResourcePathType.LinkLibraryPath);
             string[] filePaths = Directory.GetFiles(libraryPath, "*.bytes");
             long lastWriteTimeTick = filePaths.Select(path => File.GetLastWriteTime(path).Ticks).Prepend(0).Max();
             LastCompileTimeTick = lastWriteTimeTick;
@@ -228,7 +228,7 @@ namespace NovaFramework.Editor
         /// </summary>
         static void CopyDll(IList<string> reloadableAssemblyNames, string compileTimeStr)
         {
-            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
+            string libraryPath = EnvironmentPath.GetPath(ResourcePathType.LinkLibraryPath);
             if (!Directory.Exists(libraryPath))
             {
                 Directory.CreateDirectory(libraryPath);

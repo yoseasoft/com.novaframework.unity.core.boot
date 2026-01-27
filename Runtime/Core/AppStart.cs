@@ -203,7 +203,7 @@ namespace NovaFramework
             var dllAssets = new Asset[aotDllNames.Count];
             for (int i = 0; i < aotDllNames.Count; i++)
             {
-                string filePath = SystemPath.GetFilePath(ResourcePathType.AotLibraryPath, Utility.Platform.CurrentPlatformName, $"{aotDllNames[i]}.bytes");
+                string filePath = EnvironmentPath.GetFilePath(ResourcePathType.AotLibraryPath, Utility.Platform.CurrentPlatformName, $"{aotDllNames[i]}.bytes");
                 var asset = AssetManagement.LoadAssetAsync(filePath, typeof(TextAsset));
                 dllAssets[i] = asset;
             }
@@ -237,7 +237,7 @@ namespace NovaFramework
         {
             Dictionary<string, Asset> name2DllAssets = new();
             IList<string> assemblyNames = AppLibrary.GetAllAssemblyNames();
-            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
+            string libraryPath = EnvironmentPath.GetPath(ResourcePathType.LinkLibraryPath);
             foreach (string dllName in assemblyNames)
             {
                 string fileName = $"{dllName}.dll";
@@ -293,7 +293,7 @@ namespace NovaFramework
         public async static UniTask ReloadAssembliesFromAssetsAsync()
         {
             IList<string> assemblyNames = AppLibrary.GetAllReloadableAssemblyNames();
-            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
+            string libraryPath = EnvironmentPath.GetPath(ResourcePathType.LinkLibraryPath);
 
             for (int n = 0; n < assemblyNames.Count; ++n)
             {

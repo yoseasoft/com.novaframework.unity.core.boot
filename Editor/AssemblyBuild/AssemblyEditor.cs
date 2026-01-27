@@ -109,7 +109,7 @@ namespace NovaFramework.Editor
             bool needCompile = false;
 
             // 先判断最后编译文件修改时间和记录的编译时间是否一致, 不一致也重新编译(因svn相关操作可能会改动)
-            string libraryPath = SystemPath.GetPath(ResourcePathType.LinkLibraryPath);
+            string libraryPath = EnvironmentPath.GetPath(ResourcePathType.LinkLibraryPath);
             string[] filePaths = Directory.GetFiles(libraryPath, "*.bytes");
             long lastWriteTimeTick = filePaths.Select(path => File.GetLastWriteTime(path).Ticks).Prepend(0).Max();
             if (AssemblyCompile.LastCompileTimeTick != lastWriteTimeTick)
@@ -120,7 +120,7 @@ namespace NovaFramework.Editor
             if (!needCompile)
             {
                 // 然后判断代码文件时间是否大于编译时间, 若代码文件更加新, 则代表需要编译
-                string sourceCodePath = SystemPath.GetPath(ResourcePathType.SourceCodePath);
+                string sourceCodePath = EnvironmentPath.GetPath(ResourcePathType.SourceCodePath);
                 filePaths = Directory.GetFiles(sourceCodePath, "*.cs", SearchOption.AllDirectories);
                 lastWriteTimeTick = filePaths.Select(path => File.GetLastWriteTime(path).Ticks).Prepend(0).Max();
                 if (AssemblyCompile.LastCompileTimeTick > lastWriteTimeTick)

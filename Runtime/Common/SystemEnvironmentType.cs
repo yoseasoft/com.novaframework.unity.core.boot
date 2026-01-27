@@ -43,7 +43,7 @@ namespace NovaFramework
             {
                 vars.Add(environmentVariableObject.key, environmentVariableObject.value);
             }
-            SystemVariables.SetValue(vars);
+            EnvironmentVariables.SetValue(vars);
 
             for (int n = 0; n < modules.Count; ++n)
             {
