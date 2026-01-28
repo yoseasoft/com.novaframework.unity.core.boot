@@ -27,10 +27,10 @@ using System.Text;
 namespace NovaFramework
 {
     /// <summary>
-    /// 程序集定义数据模型容器类
+    /// 系统环境数据模型容器类
     /// </summary>
     [Serializable]
-    internal sealed class AssemblyDefinitionObjectWrapper
+    internal sealed class SystemEnvironmentDataWrapper
     {
         public List<EnvironmentVariableObject> variables = new ();
         public List<AssemblyDefinitionObject> modules = new ();

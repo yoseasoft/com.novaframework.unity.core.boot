@@ -33,7 +33,7 @@ namespace NovaFramework
     /// <summary>
     /// 应用程序的基础配置，用于应用正式启动的参数设置
     /// </summary>
-    [CreateAssetMenu(fileName = "AppSettings", menuName = "Nova Framework/Application Settings")] // 创建后可以不再显示在右键菜单
+    // [CreateAssetMenu(fileName = "AppSettings", menuName = "Nova Framework/Application Settings")] // 创建后可以不再显示在右键菜单
     public class AppSettings : ScriptableObject
     {
         // ----------------------------------------------------------------------------------------------------
@@ -76,19 +76,19 @@ namespace NovaFramework
 
         [FieldLabelName("刷新帧数")]
         [Tooltip("应用程序的逻辑刷新帧数")]
-        public int frameRate = 30;
+        public int frameRate = 0;
 
         [FieldLabelName("动画速率")]
         [Tooltip("应用程序的动画刷新帧率")]
-        public int animationRate = 30;
+        public int animationRate = 0;
 
         [FieldLabelName("分辨率宽度")]
         [Tooltip("分辨率宽度")]
-        public int designResolutionWidth = 1920;
+        public int designResolutionWidth = 0;
 
         [FieldLabelName("分辨率高度")]
         [Tooltip("分辨率高度")]
-        public int designResolutionHeight = 1080;
+        public int designResolutionHeight = 0;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("自定义环境变量")]

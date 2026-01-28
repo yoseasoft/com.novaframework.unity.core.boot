@@ -106,8 +106,8 @@ namespace NovaFramework
                 return;
             }
 
-            AssemblyDefinitionObjectWrapper assemblyDefinitionObjectWrapper = JsonUtility.FromJson<AssemblyDefinitionObjectWrapper>(textAsset.text);
-            assemblyDefinitionObjectWrapper.AutoRegisterDatas();
+            SystemEnvironmentDataWrapper systemEnvironmentDataWrapper = JsonUtility.FromJson<SystemEnvironmentDataWrapper>(textAsset.text);
+            systemEnvironmentDataWrapper.AutoRegisterDatas();
             Resources.UnloadAsset(textAsset);
         }
 
