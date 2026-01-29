@@ -33,25 +33,25 @@ namespace NovaFramework
         /// <summary>
         /// 程序集名称列表
         /// </summary>
-        static IList<string> _assemblyNames = null;
+        static IReadOnlyList<string> _assemblyNames = null;
         /// <summary>
         /// 可加载程序集名称列表
         /// </summary>
-        static IList<string> _loadableAssemblyNames = null;
+        static IReadOnlyList<string> _loadableAssemblyNames = null;
         /// <summary>
         /// 可重载程序集名称列表
         /// </summary>
-        static IList<string> _reloadableAssemblyNames = null;
+        static IReadOnlyList<string> _reloadableAssemblyNames = null;
         /// <summary>
         /// 元数据链接库名称列表
         /// </summary>
-        static IList<string> _aotLibraryNames = null;
+        static IReadOnlyList<string> _aotLibraryNames = null;
 
         /// <summary>
         /// 获取当前系统注册的全部程序集名称
         /// </summary>
         /// <returns>返回全部程序集的名称列表</returns>
-        public static IList<string> GetAllAssemblyNames()
+        public static IReadOnlyList<string> GetAllAssemblyNames()
         {
             if (null == _assemblyNames)
             {
@@ -72,7 +72,7 @@ namespace NovaFramework
         /// 获取当前系统注册的全部可加载程序集名称
         /// </summary>
         /// <returns>返回全部可加载程序集的名称列表</returns>
-        public static IList<string> GetAllLoadableAssemblyNames()
+        public static IReadOnlyList<string> GetAllLoadableAssemblyNames()
         {
             if (null == _loadableAssemblyNames)
             {
@@ -97,7 +97,7 @@ namespace NovaFramework
         /// 获取当前系统注册的全部可重载程序集名称
         /// </summary>
         /// <returns>返回全部可重载程序集的名称列表</returns>
-        public static IList<string> GetAllReloadableAssemblyNames()
+        public static IReadOnlyList<string> GetAllReloadableAssemblyNames()
         {
             if (null == _reloadableAssemblyNames)
             {
@@ -120,7 +120,7 @@ namespace NovaFramework
         /// 获取当前系统注册的全部元数据链接库名称
         /// </summary>
         /// <returns>返回全部元数据链接库的名称列表</returns>
-        public static IList<string> GetAllGenericAotNames()
+        public static IReadOnlyList<string> GetAllGenericAotNames()
         {
             if (null == _aotLibraryNames)
             {

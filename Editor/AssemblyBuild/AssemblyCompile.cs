@@ -144,7 +144,7 @@ namespace NovaFramework.Editor
         {
             string compileTimeStr = DateTime.Now.Ticks.ToString();
 
-            IList<string> hotfixDllNames = AppLibrary.GetAllReloadableAssemblyNames();
+            IReadOnlyList<string> hotfixDllNames = AppLibrary.GetAllReloadableAssemblyNames();
 
             // 将可热重载的dll改成唯一名字
             if (IsUniqueCompile)
@@ -187,7 +187,7 @@ namespace NovaFramework.Editor
         /// <summary>
         /// 重命名可以热重载的dll(因HybridCLR不允许加载重复名字的dll, 故改成唯一名字)
         /// </summary>
-        static void RenameHotfixDllByTime(IList<string> assemblyNames, string compileTimeStr)
+        static void RenameHotfixDllByTime(IReadOnlyList<string> assemblyNames, string compileTimeStr)
         {
             foreach (string assemblyName in assemblyNames)
             {
@@ -198,7 +198,7 @@ namespace NovaFramework.Editor
         /// <summary>
         /// 将热重载dll命名重置
         /// </summary>
-        static void RevertHotfixDllName(IList<string> assemblyNames, string compileTimeStr)
+        static void RevertHotfixDllName(IReadOnlyList<string> assemblyNames, string compileTimeStr)
         {
             bool isRevert = false;
 
@@ -226,7 +226,7 @@ namespace NovaFramework.Editor
         /// <summary>
         /// 复制成bytes
         /// </summary>
-        static void CopyDll(IList<string> reloadableAssemblyNames, string compileTimeStr)
+        static void CopyDll(IReadOnlyList<string> reloadableAssemblyNames, string compileTimeStr)
         {
             string libraryPath = EnvironmentPath.GetPath(ResourcePathType.LinkLibraryPath);
             if (!Directory.Exists(libraryPath))
@@ -234,7 +234,7 @@ namespace NovaFramework.Editor
                 Directory.CreateDirectory(libraryPath);
             }
 
-            IList<string> assemblyNames = AppLibrary.GetAllAssemblyNames();
+            IReadOnlyList<string> assemblyNames = AppLibrary.GetAllAssemblyNames();
 
             foreach (string dllName in assemblyNames)
             {

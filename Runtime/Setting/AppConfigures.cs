@@ -3,7 +3,7 @@
 /// Copyright (C) 2020 - 2022, Guangzhou Xinyuan Technology Co., Ltd.
 /// Copyright (C) 2022 - 2023, Shanghai Bilibili Technology Co., Ltd.
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
-/// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
+/// Copyright (C) 2025 - 2026, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -62,6 +62,21 @@ namespace NovaFramework
         [FieldLabelName("日志使用系统颜色")]
         [Tooltip("日志文本颜色使用系统设置，具体颜色值请参考编辑窗口定义")]
         public bool logUsingSystemColor = false;
+
+        [FieldLabelName("日志分组过滤模式")]
+        [Tooltip("当此模式打开后，日志的分组输出将默认启动，并根据过滤清单对指定的分组进行单独过滤处理")]
+        public bool logUsingGroupFilter = false;
+
+        // ----------------------------------------------------------------------------------------------------
+        [Header("应用程序调试设置")]
+
+        [FieldLabelName("调试窗口模式")]
+        [Tooltip("当此模式打开后，程序将自动挂载调试窗口组件，支持查看程序运行时的动态分析数据")]
+        public bool debuggerWindowMode = false;
+
+        [FieldLabelName("自动统计模式")]
+        [Tooltip("当此模式打开后，程序将自动对实体对象进行统计，并在调试窗口中显示其统计信息")]
+        public bool autoStatisticsMode = false;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序教程设置")]

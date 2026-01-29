@@ -3,7 +3,7 @@
 /// Copyright (C) 2020 - 2022, Guangzhou Xinyuan Technology Co., Ltd.
 /// Copyright (C) 2022 - 2023, Shanghai Bilibili Technology Co., Ltd.
 /// Copyright (C) 2023, Guangzhou Shiyue Network Technology Co., Ltd.
-/// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
+/// Copyright (C) 2025 - 2026, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -62,6 +62,10 @@ namespace NovaFramework
         [FieldLabelName("链接模式")]
         [Tooltip("当此模式打开后，程序将通过链接库的方式启动(需要断点调试可关闭该模式)")]
         public bool dylinkMode = false;
+
+        [FieldLabelName("热载模式")]
+        [Tooltip("当此模式打开后，程序将支持程序集的热重载操作(需要同时开启链接模式才能正常使用)")]
+        public bool hotfixMode = false;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序系统参数")]

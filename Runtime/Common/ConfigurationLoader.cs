@@ -1,6 +1,6 @@
 /// -------------------------------------------------------------------------------
 /// Copyright (C) 2024, Guangzhou Shiyue Network Technology Co., Ltd.
-/// Copyright (C) 2025, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
+/// Copyright (C) 2025 - 2026, Hainan Yuanyou Information Technology Co., Ltd. Guangzhou Branch
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -60,6 +60,7 @@ namespace NovaFramework
             vars.Add(nameof(settings.cryptMode), settings.cryptMode.ToString());
             vars.Add(nameof(settings.offlineMode), settings.offlineMode.ToString());
             vars.Add(nameof(settings.dylinkMode), settings.dylinkMode.ToString());
+            vars.Add(nameof(settings.hotfixMode), settings.hotfixMode.ToString());
 
             // 系统参数
             vars.Add(nameof(settings.applicationName), settings.applicationName.ToString());
@@ -95,9 +96,20 @@ namespace NovaFramework
 #if DEBUG
             vars.Add(nameof(configures.logUsingCustomColor), configures.logUsingCustomColor.ToString());
             vars.Add(nameof(configures.logUsingSystemColor), configures.logUsingSystemColor.ToString());
+            vars.Add(nameof(configures.logUsingGroupFilter), configures.logUsingGroupFilter.ToString());
 #else
             vars.Add(nameof(configures.logUsingCustomColor), "false");
             vars.Add(nameof(configures.logUsingSystemColor), "false");
+            vars.Add(nameof(configures.logUsingGroupFilter), "false");
+#endif
+
+            // 调试设置
+#if DEBUG
+            vars.Add(nameof(configures.debuggerWindowMode), configures.debuggerWindowMode.ToString());
+            vars.Add(nameof(configures.autoStatisticsMode), configures.autoStatisticsMode.ToString());
+#else
+            vars.Add(nameof(configures.debuggerWindowMode), "false");
+            vars.Add(nameof(configures.autoStatisticsMode), "false");
 #endif
 
             // 教程设置
@@ -159,7 +171,7 @@ namespace NovaFramework
             await request.SendWebRequest();
             if (request.result != UnityEngine.Networking.UnityWebRequest.Result.Success)
             {
-                Logger.Error("获取目标配置文件‘{%s}’失败，错误原因：{%s}！", path, request.error);
+                Logger.Error("获取目标配置文件‘{0}’失败，错误原因：{1}！", path, request.error);
                 return null;
             }
 
@@ -193,7 +205,7 @@ namespace NovaFramework
                 if (str_list.Length != 2)
                 {
                     // 文本格式错误
-                    Logger.Warn("Invalid property content with text '{%s}', parsing it failed.", line);
+                    Logger.Warn("Invalid property content with text '{0}', parsing it failed.", line);
                     return false;
                 }
 
@@ -201,7 +213,7 @@ namespace NovaFramework
                 string value = str_list[1].Trim();
                 if (variables.ContainsKey(key))
                 {
-                    Logger.Warn("The property key '{%s}' was already exist, repeat added it failed.", key);
+                    Logger.Warn("The property key '{0}' was already exist, repeat added it failed.", key);
                     // variables.Remove(key);
                     return false;
                 }
