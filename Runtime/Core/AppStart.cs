@@ -122,7 +122,7 @@ namespace NovaFramework
 #elif USE_HYBRIDCLR_RUNTIME_CONTEXT
             await LoadMetadataAsync();
 
-            if (Application.isEditor && !AppSettings.Instance.dylinkMode)
+            if (Application.isEditor && !AppSettings.Instance.DylinkMode)
             {
                 LoadAssembliesFromCurrentDomain();
                 return;

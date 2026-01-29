@@ -41,63 +41,63 @@ namespace NovaFramework
 
         [FieldLabelName("编辑模式")]
         [Tooltip("仅当此模式打开后可以通过路径方式访问未打包的原始资源")]
-        public bool editorMode = false;
+        public bool EditorMode = false;
 
         [FieldLabelName("调试模式")]
         [Tooltip("仅当此模式打开后可以启用调试窗口组件和输出调试信息")]
-        public bool debugMode = false;
+        public bool DebugMode = false;
 
         [EnumLabelName("调试级别")]
         [Tooltip("输出调试信息的分级设置，可以通过该分级控制输出信息内容")]
-        public DebugLevelType debugLevel = DebugLevelType.Debug;
+        public DebugLevelType DebugLevel = DebugLevelType.Debug;
 
         [FieldLabelName("加密模式")]
         [Tooltip("当此模式打开后，将对程序中的所有资源进行解码访问")]
-        public bool cryptMode = false;
+        public bool CryptMode = false;
 
         [FieldLabelName("离线模式")]
         [Tooltip("当此模式打开后，程序将不再执行在线更新流程访问")]
-        public bool offlineMode = false;
+        public bool OfflineMode = false;
 
         [FieldLabelName("链接模式")]
         [Tooltip("当此模式打开后，程序将通过链接库的方式启动(需要断点调试可关闭该模式)")]
-        public bool dylinkMode = false;
+        public bool DylinkMode = false;
 
         [FieldLabelName("热载模式")]
         [Tooltip("当此模式打开后，程序将支持程序集的热重载操作(需要同时开启链接模式才能正常使用)")]
-        public bool hotfixMode = false;
+        public bool HotfixMode = false;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序系统参数")]
 
         [FieldLabelName("应用名称")]
         [Tooltip("应用程序的唯一名称，将应用在安装环境下的目录与文件命名")]
-        public string applicationName = "unknown";
+        public string ApplicationName = "unknown";
 
         [FieldLabelName("应用编码")]
         [Tooltip("应用程序的唯一编码，通常应用在后台以区分不同的安装程序")]
-        public int applicationCode = 0;
+        public int ApplicationCode = 0;
 
         [FieldLabelName("刷新帧数")]
         [Tooltip("应用程序的逻辑刷新帧数")]
-        public int frameRate = 0;
+        public int FrameRate = 0;
 
         [FieldLabelName("动画速率")]
         [Tooltip("应用程序的动画刷新帧率")]
-        public int animationRate = 0;
+        public int AnimationRate = 0;
 
         [FieldLabelName("分辨率宽度")]
         [Tooltip("分辨率宽度")]
-        public int designResolutionWidth = 0;
+        public int DesignResolutionWidth = 0;
 
         [FieldLabelName("分辨率高度")]
         [Tooltip("分辨率高度")]
-        public int designResolutionHeight = 0;
+        public int DesignResolutionHeight = 0;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("自定义环境变量")]
 
-        public List<CustomizeEnvironmentVariable> customizeEnvironmentVariables = new();
+        public List<CustomizeEnvironmentVariable> CustomizeEnvironmentVariables = new();
 
         /// <summary>
         /// AppSettings示例

@@ -2,7 +2,7 @@
   "name": "com.novaframework.unity.core.boot",
   "displayName": "NovaFramework.Boot",
   "description": "The boot module of core system for NovaFramework",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "unity": "2018.3",
   "unityRelease": "0f1",
   "license": "MIT",

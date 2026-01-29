@@ -39,55 +39,55 @@ namespace NovaFramework
 
         [FieldLabelName("游戏入口")]
         [Tooltip("应用程序业务层入口，必须填写该名称后才可以正常启动业务逻辑")]
-        public string gameEntryName = null;
+        public string GameEntryName = null;
 
         [FieldLabelName("休眠模式")]
         [Tooltip("当此模式打开后程序将不会进入休眠状态")]
-        public bool screenNeverSleep = false;
+        public bool ScreenNeverSleep = false;
 
         [EnumLabelName("网络消息包头长度")]
         [Tooltip("应用程序网络通信的消息包头长度设置，必须设置该选项后才可以进行网络通信")]
-        public NetworkMessageHeaderSizeType networkMessageHeaderSize = NetworkMessageHeaderSizeType.Unknown;
+        public NetworkMessageHeaderSizeType NetworkMessageHeaderSize = NetworkMessageHeaderSizeType.Unknown;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序日志设置")]
 
         [Tooltip("日志通道开启的类型组合，可以同时开启多种不同类型的通道用于日志输出")]
-        public LogChannelType[] logChannel = null;
+        public LogChannelType[] LogChannel = null;
 
         [FieldLabelName("日志使用自定义颜色")]
         [Tooltip("日志文本颜色使用自定义设置，具体颜色值请参考编辑窗口定义")]
-        public bool logUsingCustomColor = false;
+        public bool LogUsingCustomColor = false;
 
         [FieldLabelName("日志使用系统颜色")]
         [Tooltip("日志文本颜色使用系统设置，具体颜色值请参考编辑窗口定义")]
-        public bool logUsingSystemColor = false;
+        public bool LogUsingSystemColor = false;
 
         [FieldLabelName("日志分组过滤模式")]
         [Tooltip("当此模式打开后，日志的分组输出将默认启动，并根据过滤清单对指定的分组进行单独过滤处理")]
-        public bool logUsingGroupFilter = false;
+        public bool LogUsingGroupFilter = false;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序调试设置")]
 
         [FieldLabelName("调试窗口模式")]
         [Tooltip("当此模式打开后，程序将自动挂载调试窗口组件，支持查看程序运行时的动态分析数据")]
-        public bool debuggerWindowMode = false;
+        public bool DebuggerWindowMode = false;
 
         [FieldLabelName("自动统计模式")]
         [Tooltip("当此模式打开后，程序将自动对实体对象进行统计，并在调试窗口中显示其统计信息")]
-        public bool autoStatisticsMode = false;
+        public bool AutoStatisticsMode = false;
 
         // ----------------------------------------------------------------------------------------------------
         [Header("应用程序教程设置")]
 
         [FieldLabelName("教程模式")]
         [Tooltip("当此模式打开后，程序将跳转到演示案例环境下进行启动")]
-        public bool tutorialMode = false;
+        public bool TutorialMode = false;
 
         [FieldLabelName("教程案例")]
         [Tooltip("通过选择教程示例，程序运行后将在对应的案例环境下进行启动")]
-        public TutorialSampleType tutorialSampleType = TutorialSampleType.Unknown;
+        public TutorialSampleType TutorialSampleType = TutorialSampleType.Unknown;
 
         /// <summary>
         /// AppConfigures示例

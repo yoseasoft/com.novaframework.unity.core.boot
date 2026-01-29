@@ -40,16 +40,16 @@ namespace NovaFramework.Editor
         {
             AssetDatabaseUtils.CreateScriptableObjectAsset<AppSettings>(AppSettingsAssetUrl, (asset) =>
             {
-                asset.editorMode = true;
-                asset.debugMode = true;
-                asset.debugLevel = DebugLevelType.Debug;
+                asset.EditorMode = true;
+                asset.DebugMode = true;
+                asset.DebugLevel = DebugLevelType.Debug;
 
-                asset.applicationName = Application.productName;
-                asset.applicationCode = 0;
-                asset.frameRate = 20;
-                asset.animationRate = 60;
-                asset.designResolutionWidth = 1920;
-                asset.designResolutionHeight = 1080;
+                asset.ApplicationName = Application.productName;
+                asset.ApplicationCode = 0;
+                asset.FrameRate = 20;
+                asset.AnimationRate = 60;
+                asset.DesignResolutionWidth = 1920;
+                asset.DesignResolutionHeight = 1080;
             });
         }
 
@@ -60,9 +60,9 @@ namespace NovaFramework.Editor
         {
             AssetDatabaseUtils.CreateScriptableObjectAsset<AppConfigures>(AppConfigureAssetUrl, (asset) =>
             {
-                asset.gameEntryName = @"Game.GameWorld";
+                asset.GameEntryName = @"Game.GameWorld";
 
-                asset.logChannel = new LogChannelType[] { LogChannelType.Console, LogChannelType.Editor };
+                asset.LogChannel = new LogChannelType[] { LogChannelType.Console, LogChannelType.Editor };
             });
         }
     }

@@ -58,7 +58,7 @@ namespace NovaFramework
                 _assemblyNames = DynamicLibrary.GetAllAssemblyNames((info) =>
                 {
                     // 教程相关程序模块的过滤
-                    if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
                         return false;
 
                     return true;
@@ -83,7 +83,7 @@ namespace NovaFramework
                         return false;
 
                     // 教程相关程序模块的过滤
-                    if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
                         return false;
 
                     return true;
@@ -103,7 +103,7 @@ namespace NovaFramework
             {
                 _reloadableAssemblyNames = DynamicLibrary.GetAllPlayableAssemblyNames((info) =>
                 {
-                    if (!AppConfigures.Instance.tutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
                         return false;
 
                     if (!info.IsContainsTag(LibraryTag.Hotfix))

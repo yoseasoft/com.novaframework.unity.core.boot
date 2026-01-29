@@ -46,32 +46,32 @@ namespace NovaFramework
 
             // 运行模式
 #if UNITY_EDITOR
-            vars.Add(nameof(settings.editorMode), settings.editorMode.ToString());
+            vars.Add(nameof(settings.EditorMode), settings.EditorMode.ToString());
 #else
-            vars.Add(nameof(settings.editorMode), "false");
+            vars.Add(nameof(settings.EditorMode), "false");
 #endif
 
 #if DEBUG
-            vars.Add(nameof(settings.debugMode), settings.debugMode.ToString());
+            vars.Add(nameof(settings.DebugMode), settings.DebugMode.ToString());
 #else
-            vars.Add(nameof(settings.debugMode), "false");
+            vars.Add(nameof(settings.DebugMode), "false");
 #endif
-            vars.Add(nameof(settings.debugLevel), ((int) settings.debugLevel).ToString());
-            vars.Add(nameof(settings.cryptMode), settings.cryptMode.ToString());
-            vars.Add(nameof(settings.offlineMode), settings.offlineMode.ToString());
-            vars.Add(nameof(settings.dylinkMode), settings.dylinkMode.ToString());
-            vars.Add(nameof(settings.hotfixMode), settings.hotfixMode.ToString());
+            vars.Add(nameof(settings.DebugLevel), ((int) settings.DebugLevel).ToString());
+            vars.Add(nameof(settings.CryptMode), settings.CryptMode.ToString());
+            vars.Add(nameof(settings.OfflineMode), settings.OfflineMode.ToString());
+            vars.Add(nameof(settings.DylinkMode), settings.DylinkMode.ToString());
+            vars.Add(nameof(settings.HotfixMode), settings.HotfixMode.ToString());
 
             // 系统参数
-            vars.Add(nameof(settings.applicationName), settings.applicationName.ToString());
-            vars.Add(nameof(settings.applicationCode), settings.applicationCode.ToString());
-            vars.Add(nameof(settings.frameRate), settings.frameRate.ToString());
-            vars.Add(nameof(settings.animationRate), settings.animationRate.ToString());
-            vars.Add(nameof(settings.designResolutionWidth), settings.designResolutionWidth.ToString());
-            vars.Add(nameof(settings.designResolutionHeight), settings.designResolutionHeight.ToString());
+            vars.Add(nameof(settings.ApplicationName), settings.ApplicationName.ToString());
+            vars.Add(nameof(settings.ApplicationCode), settings.ApplicationCode.ToString());
+            vars.Add(nameof(settings.FrameRate), settings.FrameRate.ToString());
+            vars.Add(nameof(settings.AnimationRate), settings.AnimationRate.ToString());
+            vars.Add(nameof(settings.DesignResolutionWidth), settings.DesignResolutionWidth.ToString());
+            vars.Add(nameof(settings.DesignResolutionHeight), settings.DesignResolutionHeight.ToString());
 
             // 自定义环境变量
-            foreach (CustomizeEnvironmentVariable v in settings.customizeEnvironmentVariables)
+            foreach (CustomizeEnvironmentVariable v in settings.CustomizeEnvironmentVariables)
             {
                 vars.Add(v.key, v.value);
             }
@@ -80,48 +80,48 @@ namespace NovaFramework
             AppConfigures configures = AppConfigures.Instance;
 
             // 运行设置
-            vars.Add(nameof(configures.gameEntryName), configures.gameEntryName.ToString());
-            vars.Add(nameof(configures.screenNeverSleep), configures.screenNeverSleep.ToString());
-            vars.Add(nameof(configures.networkMessageHeaderSize), ((int) configures.networkMessageHeaderSize).ToString());
+            vars.Add(nameof(configures.GameEntryName), configures.GameEntryName.ToString());
+            vars.Add(nameof(configures.ScreenNeverSleep), configures.ScreenNeverSleep.ToString());
+            vars.Add(nameof(configures.NetworkMessageHeaderSize), ((int) configures.NetworkMessageHeaderSize).ToString());
 
             // 日志设置
             int logChannel = 0;
-            for (int n = 0; null != configures.logChannel && n < configures.logChannel.Length; ++n)
+            for (int n = 0; null != configures.LogChannel && n < configures.LogChannel.Length; ++n)
             {
-                logChannel |= (int) configures.logChannel[n];
+                logChannel |= (int) configures.LogChannel[n];
             }
 
-            vars.Add(nameof(configures.logChannel), logChannel.ToString());
+            vars.Add(nameof(configures.LogChannel), logChannel.ToString());
 
 #if DEBUG
-            vars.Add(nameof(configures.logUsingCustomColor), configures.logUsingCustomColor.ToString());
-            vars.Add(nameof(configures.logUsingSystemColor), configures.logUsingSystemColor.ToString());
-            vars.Add(nameof(configures.logUsingGroupFilter), configures.logUsingGroupFilter.ToString());
+            vars.Add(nameof(configures.LogUsingCustomColor), configures.LogUsingCustomColor.ToString());
+            vars.Add(nameof(configures.LogUsingSystemColor), configures.LogUsingSystemColor.ToString());
+            vars.Add(nameof(configures.LogUsingGroupFilter), configures.LogUsingGroupFilter.ToString());
 #else
-            vars.Add(nameof(configures.logUsingCustomColor), "false");
-            vars.Add(nameof(configures.logUsingSystemColor), "false");
-            vars.Add(nameof(configures.logUsingGroupFilter), "false");
+            vars.Add(nameof(configures.LogUsingCustomColor), "false");
+            vars.Add(nameof(configures.LogUsingSystemColor), "false");
+            vars.Add(nameof(configures.LogUsingGroupFilter), "false");
 #endif
 
             // 调试设置
 #if DEBUG
-            vars.Add(nameof(configures.debuggerWindowMode), configures.debuggerWindowMode.ToString());
-            vars.Add(nameof(configures.autoStatisticsMode), configures.autoStatisticsMode.ToString());
+            vars.Add(nameof(configures.DebuggerWindowMode), configures.DebuggerWindowMode.ToString());
+            vars.Add(nameof(configures.AutoStatisticsMode), configures.AutoStatisticsMode.ToString());
 #else
-            vars.Add(nameof(configures.debuggerWindowMode), "false");
-            vars.Add(nameof(configures.autoStatisticsMode), "false");
+            vars.Add(nameof(configures.DebuggerWindowMode), "false");
+            vars.Add(nameof(configures.AutoStatisticsMode), "false");
 #endif
 
             // 教程设置
 #if DEBUG
-            vars.Add(nameof(configures.tutorialMode), configures.tutorialMode.ToString());
+            vars.Add(nameof(configures.TutorialMode), configures.TutorialMode.ToString());
 #else
-            vars.Add(nameof(configures.tutorialMode), "false");
+            vars.Add(nameof(configures.TutorialMode), "false");
 #endif
-            if ((int) configures.tutorialSampleType > 0)
+            if ((int) configures.TutorialSampleType > 0)
             {
                 // 合法配置教程案例
-                vars.Add(nameof(configures.tutorialSampleType), configures.tutorialSampleType.ToString());
+                vars.Add(nameof(configures.TutorialSampleType), configures.TutorialSampleType.ToString());
             }
 
             // await LoadConfigureSettingsVariables(vars);

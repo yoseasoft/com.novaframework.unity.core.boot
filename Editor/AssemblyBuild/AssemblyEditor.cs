@@ -70,7 +70,7 @@ namespace NovaFramework.Editor
         /// </summary>
         static void OnExitingEditMode()
         {
-            if (!AppSettings.Instance.dylinkMode)
+            if (!AppSettings.Instance.DylinkMode)
             {
                 return;
             }
