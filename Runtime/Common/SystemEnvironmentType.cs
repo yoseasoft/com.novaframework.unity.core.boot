@@ -32,28 +32,28 @@ namespace NovaFramework
     [Serializable]
     internal sealed class SystemEnvironmentDataWrapper
     {
-        public List<EnvironmentVariableObject> variables = new ();
-        public List<AssemblyDefinitionObject> modules = new ();
+        public List<Serialization.SerializedVariableObject> variables = new ();
+        public List<Serialization.SerializedLibraryObject> modules = new ();
         public List<string> aot_libraries = new ();
 
         public void AutoRegisterDatas()
         {
             Dictionary<string, string> vars = new Dictionary<string, string>();
-            foreach (EnvironmentVariableObject environmentVariableObject in variables)
+            foreach (Serialization.SerializedVariableObject variableObject in variables)
             {
-                vars.Add(environmentVariableObject.key, environmentVariableObject.value);
+                vars.Add(variableObject.key, variableObject.value);
             }
-            EnvironmentVariables.SetValue(vars);
+            EnvironmentVariables.Instance.SetValue(vars);
 
             for (int n = 0; n < modules.Count; ++n)
             {
-                AssemblyDefinitionObject module = modules[n];
-                DynamicLibrary.RegisterLibraryInfo(module.order, module.name, module.tags);
+                Serialization.SerializedLibraryObject module = modules[n];
+                DynamicLibrary.Instance.RegisterLibraryInfo(module.order, module.name, module.tags);
             }
 
             for (int n = 0; n < aot_libraries.Count; ++n)
             {
-                DynamicLibrary.RegisterAotLibraryName(aot_libraries[n]);
+                DynamicLibrary.Instance.RegisterAotLibraryName(aot_libraries[n]);
             }
         }
 
@@ -70,48 +70,6 @@ namespace NovaFramework
             for (int n = 0; n < aot_libraries.Count; ++n) sb.AppendFormat("{0},", aot_libraries[n].ToString());
             sb.Append("}");
             return sb.ToString();
-        }
-
-        /// <summary>
-        /// 环境变量数据模型对象类
-        /// </summary>
-        [Serializable]
-        internal sealed class EnvironmentVariableObject
-        {
-            public string key;
-            public string value;
-
-            public override string ToString()
-            {
-                return new StringBuilder()
-                    .AppendFormat("key={0},", key)
-                    .AppendFormat("value={0}", value)
-                    .ToString();
-            }
-        }
-
-        /// <summary>
-        /// 程序集定义数据模型对象类
-        /// </summary>
-        [Serializable]
-        internal sealed class AssemblyDefinitionObject
-        {
-            public string name;
-            public int order;
-            public List<string> tags = new();
-
-            public override string ToString()
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("name={0},", name);
-                sb.AppendFormat("order={0},", order);
-
-                sb.Append("tags={");
-                for (int n = 0; n < tags.Count; ++n) sb.AppendFormat("{0},", tags[n]);
-                sb.Append("}");
-
-                return sb.ToString();
-            }
         }
     }
 }

@@ -256,7 +256,7 @@ namespace NovaFramework
             {
 #if UNITY_EDITOR
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载
-                LibraryInfo info = DynamicLibrary.GetLibraryInfoByAssemblyName(dllName);
+                LibraryInfo info = DynamicLibrary.Instance.GetLibraryInfoByAssemblyName(dllName);
                 // if (dllName == AgenDllName)
                 if (info.IsContainsTag(LibraryTag.Shared))
                 {

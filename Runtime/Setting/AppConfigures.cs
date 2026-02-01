@@ -90,7 +90,7 @@ namespace NovaFramework
         public TutorialSampleType TutorialSampleType = TutorialSampleType.Unknown;
 
         /// <summary>
-        /// AppConfigures示例
+        /// AppConfigures实例
         /// </summary>
         public static AppConfigures Instance
         {

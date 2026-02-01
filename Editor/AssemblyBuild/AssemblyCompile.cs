@@ -160,7 +160,7 @@ namespace NovaFramework.Editor
             foreach (string assemblyName in hotfixDllNames)
             {
                 string lastCompileLabelName = GetLastCompileTimeLabelNameByAssemblyName(assemblyName);
-                long lastCompileTime = File.GetLastWriteTime(DynamicLibrary.GetBinaryLibraryFilePathByAssemblyName(assemblyName)).Ticks;
+                long lastCompileTime = File.GetLastWriteTime(AppLibrary.GetBinaryLibraryFilePathByAssemblyName(assemblyName)).Ticks;
 
                 EditorConfigure.SetLong(lastCompileLabelName, lastCompileTime);
             }
@@ -271,7 +271,7 @@ namespace NovaFramework.Editor
         {
             string lastCompileTimeLabelName = GetLastCompileTimeLabelNameByAssemblyName(assemblyName);
             long previousCompileTime = EditorConfigure.GetLong(lastCompileTimeLabelName);
-            long lastCompileTime = File.GetLastWriteTime(DynamicLibrary.GetBinaryLibraryFilePathByAssemblyName(assemblyName)).Ticks;
+            long lastCompileTime = File.GetLastWriteTime(AppLibrary.GetBinaryLibraryFilePathByAssemblyName(assemblyName)).Ticks;
             bool needCompile = previousCompileTime != lastCompileTime;
 
             string sourceCodePath = GetSourceCodePathByAssemblyName(assemblyName);

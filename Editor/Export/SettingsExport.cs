@@ -26,9 +26,9 @@ using UnityEngine;
 namespace NovaFramework.Editor
 {
     /// <summary>
-    /// 设置文件编辑工具类
+    /// 设置文件导出工具类
     /// </summary>
-    static class SettingsEditor
+    static class SettingsExport
     {
         const string AppSettingsAssetUrl = @"Assets/Resources/AppSettings.asset";
         const string AppConfigureAssetUrl = @"Assets/Resources/AppConfigures.asset";
@@ -36,9 +36,9 @@ namespace NovaFramework.Editor
         /// <summary>
         /// 创建并保存‘AppSettings’资产文件
         /// </summary>
-        public static void CreateAndSaveSettingAsset()
+        public static AppSettings CreateAndSaveSettingAsset()
         {
-            AssetDatabaseUtils.CreateScriptableObjectAsset<AppSettings>(AppSettingsAssetUrl, (asset) =>
+            return AssetDatabaseUtils.CreateScriptableObjectAsset<AppSettings>(AppSettingsAssetUrl, (asset) =>
             {
                 asset.EditorMode = true;
                 asset.DebugMode = true;
@@ -56,9 +56,9 @@ namespace NovaFramework.Editor
         /// <summary>
         /// 创建并保存‘AppConfigures’资产文件
         /// </summary>
-        public static void CreateAndSaveConfigureAsset()
+        public static AppConfigures CreateAndSaveConfigureAsset()
         {
-            AssetDatabaseUtils.CreateScriptableObjectAsset<AppConfigures>(AppConfigureAssetUrl, (asset) =>
+            return AssetDatabaseUtils.CreateScriptableObjectAsset<AppConfigures>(AppConfigureAssetUrl, (asset) =>
             {
                 asset.GameEntryName = @"Game.GameWorld";
 

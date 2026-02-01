@@ -71,7 +71,7 @@ namespace NovaFramework
             vars.Add(nameof(settings.DesignResolutionHeight), settings.DesignResolutionHeight.ToString());
 
             // 自定义环境变量
-            foreach (CustomizeEnvironmentVariable v in settings.CustomizeEnvironmentVariables)
+            foreach (CustomizeEnvironmentVariable v in settings.Variables)
             {
                 vars.Add(v.key, v.value);
             }

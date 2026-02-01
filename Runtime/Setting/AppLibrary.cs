@@ -55,7 +55,7 @@ namespace NovaFramework
         {
             if (null == _assemblyNames)
             {
-                _assemblyNames = DynamicLibrary.GetAllAssemblyNames((info) =>
+                _assemblyNames = DynamicLibrary.Instance.GetAllAssemblyNames((info) =>
                 {
                     // 教程相关程序模块的过滤
                     if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
@@ -76,7 +76,7 @@ namespace NovaFramework
         {
             if (null == _loadableAssemblyNames)
             {
-                _loadableAssemblyNames = DynamicLibrary.GetAllAssemblyNames((info) =>
+                _loadableAssemblyNames = DynamicLibrary.Instance.GetAllAssemblyNames((info) =>
                 {
                     // 跳过内核或插件库
                     if (false == info.IsContainsTag(LibraryTag.Game))
@@ -101,7 +101,7 @@ namespace NovaFramework
         {
             if (null == _reloadableAssemblyNames)
             {
-                _reloadableAssemblyNames = DynamicLibrary.GetAllPlayableAssemblyNames((info) =>
+                _reloadableAssemblyNames = DynamicLibrary.Instance.GetAllPlayableAssemblyNames((info) =>
                 {
                     if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
                         return false;
@@ -124,10 +124,40 @@ namespace NovaFramework
         {
             if (null == _aotLibraryNames)
             {
-                _aotLibraryNames = DynamicLibrary.GetAllGenericAotNames();
+                _aotLibraryNames = DynamicLibrary.Instance.GetAllGenericAotNames();
             }
 
             return _aotLibraryNames;
+        }
+
+        /// <summary>
+        /// 通过程序集名称获取库文件路径
+        /// </summary>
+        /// <param name="assemblyName">程序集名称</param>
+        /// <returns>返回库文件路径</returns>
+        public static string GetLibraryFilePathByAssemblyName(string assemblyName)
+        {
+            return DynamicLibrary.Instance.GetLibraryFilePathByAssemblyName(assemblyName);
+        }
+
+        /// <summary>
+        /// 通过程序集名称获取二进制库文件路径
+        /// </summary>
+        /// <param name="assemblyName">程序集名称</param>
+        /// <returns>返回二进制库文件路径</returns>
+        public static string GetBinaryLibraryFilePathByAssemblyName(string assemblyName)
+        {
+            return DynamicLibrary.Instance.GetBinaryLibraryFilePathByAssemblyName(assemblyName);
+        }
+
+        /// <summary>
+        /// 通过程序集名称查找程序库对象实例
+        /// </summary>
+        /// <param name="assemblyName">程序集名称</param>
+        /// <returns>返回程序库实例，若查找失败则返回null</returns>
+        public static LibraryInfo GetLibraryInfoByAssemblyName(string assemblyName)
+        {
+            return DynamicLibrary.Instance.GetLibraryInfoByAssemblyName(assemblyName);
         }
     }
 }

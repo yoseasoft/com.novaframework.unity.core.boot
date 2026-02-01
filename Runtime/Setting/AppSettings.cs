@@ -24,6 +24,7 @@
 /// THE SOFTWARE.
 /// -------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -97,10 +98,10 @@ namespace NovaFramework
         // ----------------------------------------------------------------------------------------------------
         [Header("自定义环境变量")]
 
-        public List<CustomizeEnvironmentVariable> CustomizeEnvironmentVariables = new();
+        public List<CustomizeEnvironmentVariable> Variables = new();
 
         /// <summary>
-        /// AppSettings示例
+        /// AppSettings实例
         /// </summary>
         public static AppSettings Instance
         {
@@ -121,8 +122,8 @@ namespace NovaFramework
     /// <summary>
     /// 自定义环境变量键值管理对象类
     /// </summary>
-    [System.Serializable]
-    public class CustomizeEnvironmentVariable
+    [Serializable]
+    public sealed class CustomizeEnvironmentVariable
     {
         [FieldLabelName("键")]
         [Tooltip("自定义环境变量的映射键信息")]
