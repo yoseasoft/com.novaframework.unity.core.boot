@@ -35,17 +35,17 @@ namespace NovaFramework.Editor.Preference
         const string AppSettingsAssetUrl = @"Assets/Resources/AppSettings.asset";
         const string AppConfigureAssetUrl = @"Assets/Resources/AppConfigures.asset";
 
-        public void Install(Action onComplete = null)
+        public void Install(Action onComplete = null, Action<string> addLog = null)
         {
-            Debug.Log("PostInstallConfigurationExporter: 开始执行安装后配置资产创建");
+            addLog?.Invoke("开始执行安装后配置资产创建");
 
             CreateAndSaveSettingAsset();
-            Debug.Log("已创建 AppSettings.asset");
+            addLog?.Invoke("已创建 AppSettings.asset");
 
             CreateAndSaveConfigureAsset();
-            Debug.Log("已创建 AppConfigures.asset");
+            addLog?.Invoke("已创建 AppConfigures.asset");
 
-            Debug.Log("CreateConfigurationStep: 配置资产创建完成");
+            addLog?.Invoke("配置资产创建完成");
 
             // 调用完成回调
             onComplete?.Invoke();
