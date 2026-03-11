@@ -35,6 +35,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 using GooAsset;
+using NovaFramework.Serialization;
 
 namespace NovaFramework
 {
@@ -99,16 +100,25 @@ namespace NovaFramework
         /// </summary>
         static void InitRuntimeEnvironments()
         {
-            TextAsset textAsset = Resources.Load<TextAsset>("system_environments");
-            if (null == textAsset)
+            EnvironmentConfigures configures = EnvironmentConfigures.Instance;
+
+            Dictionary<string, string> vars = new Dictionary<string, string>();
+            foreach (SerializedVariableObject variableObject in configures.variables)
             {
-                Logger.Error("加载系统环境配置文件失败！");
-                return;
+                vars.Add(variableObject.key, variableObject.value);
+            }
+            EnvironmentVariables.Instance.SetValue(vars);
+
+            for (int n = 0; n < configures.modules.Count; ++n)
+            {
+                SerializedLibraryObject module = configures.modules[n];
+                DynamicLibrary.Instance.RegisterLibraryInfo(module.order, module.name, module.tags);
             }
 
-            SystemEnvironmentDataWrapper systemEnvironmentDataWrapper = JsonUtility.FromJson<SystemEnvironmentDataWrapper>(textAsset.text);
-            systemEnvironmentDataWrapper.AutoRegisterDatas();
-            Resources.UnloadAsset(textAsset);
+            for (int n = 0; n < configures.aots.Count; ++n)
+            {
+                DynamicLibrary.Instance.RegisterAotLibraryName(configures.aots[n]);
+            }
         }
 
         /// <summary>
