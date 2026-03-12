@@ -35,7 +35,7 @@ namespace NovaFramework.Editor.Preference
         const string AppSettingsAssetUrl = @"Assets/Resources/AppSettings.asset";
         const string AppConfigureAssetUrl = @"Assets/Resources/AppConfigures.asset";
 
-        public void Install(Action onComplete = null, Action<string> addLog = null)
+        public void Install(Action onMessage, Action onComplete, Action onError, Action<string> addLog)
         {
             addLog?.Invoke("开始执行安装后配置资产创建");
 
@@ -84,7 +84,7 @@ namespace NovaFramework.Editor.Preference
             });
         }
 
-        public void Uninstall(Action onComplete = null)
+        public void Uninstall(Action onMessage, Action onComplete, Action onError)
         {
             Debug.Log("PostInstallConfigurationExporter: 执行卸载操作");
 
