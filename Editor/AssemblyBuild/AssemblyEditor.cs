@@ -144,9 +144,9 @@ namespace NovaFramework.Editor
             foreach (string dll in assemblyNames)
             {
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载, 故此处不进行屏蔽
-                LibraryInfo info = AppLibrary.GetLibraryInfoByAssemblyName(dll);
+                ExtensionModuleInfo info = AppLibrary.GetModuleInfoByAssemblyName(dll);
                 // if (dll is AppStart.AgenDllName)
-                if (info.IsContainsTag(LibraryTag.Shared))
+                if (info.IsContainsTag(ExtensionModuleTag.Shared))
                 {
                     continue;
                 }

@@ -111,13 +111,13 @@ namespace NovaFramework
 
             for (int n = 0; n < configures.modules.Count; ++n)
             {
-                SerializedLibraryObject module = configures.modules[n];
-                DynamicLibrary.Instance.RegisterLibraryInfo(module.order, module.name, module.tags);
+                SerializedModuleObject module = configures.modules[n];
+                ExtensionModuleService.Instance.RegisterModuleInfo(module.order, module.name, module.tags);
             }
 
             for (int n = 0; n < configures.aots.Count; ++n)
             {
-                DynamicLibrary.Instance.RegisterAotLibraryName(configures.aots[n]);
+                ExtensionModuleService.Instance.RegisterAotFileName(configures.aots[n]);
             }
         }
 
@@ -147,7 +147,7 @@ namespace NovaFramework
         /// </summary>
         static void StartEngine()
         {
-            Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
+            Assembly assembly = _name2Assembly[ExtensionModuleService.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (null == assemblyType)
             {
@@ -170,7 +170,7 @@ namespace NovaFramework
 
         static void ReloadEngine()
         {
-            Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
+            Assembly assembly = _name2Assembly[ExtensionModuleService.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (null == assemblyType)
             {
@@ -185,7 +185,7 @@ namespace NovaFramework
 
         public static void ReloadConfigure()
         {
-            Assembly assembly = _name2Assembly[DynamicLibrary.ExternalControlEntranceName];
+            Assembly assembly = _name2Assembly[ExtensionModuleService.ExternalControlEntranceName];
             Type assemblyType = assembly?.GetType(AppDefine.AppControllerClassName);
             if (null == assemblyType)
             {
@@ -266,9 +266,9 @@ namespace NovaFramework
             {
 #if UNITY_EDITOR
                 // 因编辑器工具需要引用, 编辑器下跳过加载配置表库, 使用Unity默认加载
-                LibraryInfo info = DynamicLibrary.Instance.GetLibraryInfoByAssemblyName(dllName);
+                ExtensionModuleInfo info = ExtensionModuleService.Instance.GetModuleInfoByAssemblyName(dllName);
                 // if (dllName == AgenDllName)
-                if (info.IsContainsTag(LibraryTag.Shared))
+                if (info.IsContainsTag(ExtensionModuleTag.Shared))
                 {
                     _name2Assembly.Add(dllName, Assembly.Load(dllName));
                     continue;

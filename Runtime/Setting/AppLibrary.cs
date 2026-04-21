@@ -55,10 +55,10 @@ namespace NovaFramework
         {
             if (null == _assemblyNames)
             {
-                _assemblyNames = DynamicLibrary.Instance.GetAllAssemblyNames((info) =>
+                _assemblyNames = ExtensionModuleService.Instance.GetAllAssemblyNames((info) =>
                 {
                     // 教程相关程序模块的过滤
-                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(ExtensionModuleTag.Tutorial))
                         return false;
 
                     return true;
@@ -76,14 +76,14 @@ namespace NovaFramework
         {
             if (null == _loadableAssemblyNames)
             {
-                _loadableAssemblyNames = DynamicLibrary.Instance.GetAllAssemblyNames((info) =>
+                _loadableAssemblyNames = ExtensionModuleService.Instance.GetAllAssemblyNames((info) =>
                 {
                     // 跳过内核或插件库
-                    if (false == info.IsContainsTag(LibraryTag.Game))
+                    if (false == info.IsContainsTag(ExtensionModuleTag.Game))
                         return false;
 
                     // 教程相关程序模块的过滤
-                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(ExtensionModuleTag.Tutorial))
                         return false;
 
                     return true;
@@ -101,12 +101,12 @@ namespace NovaFramework
         {
             if (null == _reloadableAssemblyNames)
             {
-                _reloadableAssemblyNames = DynamicLibrary.Instance.GetAllPlayableAssemblyNames((info) =>
+                _reloadableAssemblyNames = ExtensionModuleService.Instance.GetAllPlayableAssemblyNames((info) =>
                 {
-                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(LibraryTag.Tutorial))
+                    if (!AppConfigures.Instance.TutorialMode && info.IsContainsTag(ExtensionModuleTag.Tutorial))
                         return false;
 
-                    if (!info.IsContainsTag(LibraryTag.Hotfix))
+                    if (!info.IsContainsTag(ExtensionModuleTag.Hotfix))
                         return false;
 
                     return true;
@@ -124,7 +124,7 @@ namespace NovaFramework
         {
             if (null == _aotLibraryNames)
             {
-                _aotLibraryNames = DynamicLibrary.Instance.GetAllGenericAotNames();
+                _aotLibraryNames = ExtensionModuleService.Instance.GetAllGenericAotNames();
             }
 
             return _aotLibraryNames;
@@ -137,7 +137,7 @@ namespace NovaFramework
         /// <returns>返回库文件路径</returns>
         public static string GetLibraryFilePathByAssemblyName(string assemblyName)
         {
-            return DynamicLibrary.Instance.GetLibraryFilePathByAssemblyName(assemblyName);
+            return ExtensionModuleService.Instance.GetLibraryFilePathByAssemblyName(assemblyName);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace NovaFramework
         /// <returns>返回二进制库文件路径</returns>
         public static string GetBinaryLibraryFilePathByAssemblyName(string assemblyName)
         {
-            return DynamicLibrary.Instance.GetBinaryLibraryFilePathByAssemblyName(assemblyName);
+            return ExtensionModuleService.Instance.GetBinaryLibraryFilePathByAssemblyName(assemblyName);
         }
 
         /// <summary>
@@ -155,9 +155,9 @@ namespace NovaFramework
         /// </summary>
         /// <param name="assemblyName">程序集名称</param>
         /// <returns>返回程序库实例，若查找失败则返回null</returns>
-        public static LibraryInfo GetLibraryInfoByAssemblyName(string assemblyName)
+        public static ExtensionModuleInfo GetModuleInfoByAssemblyName(string assemblyName)
         {
-            return DynamicLibrary.Instance.GetLibraryInfoByAssemblyName(assemblyName);
+            return ExtensionModuleService.Instance.GetModuleInfoByAssemblyName(assemblyName);
         }
     }
 }
