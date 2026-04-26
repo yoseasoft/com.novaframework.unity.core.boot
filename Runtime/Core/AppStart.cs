@@ -112,7 +112,7 @@ namespace NovaFramework
             for (int n = 0; n < configures.modules.Count; ++n)
             {
                 SerializedModuleObject module = configures.modules[n];
-                ExtensionModuleService.Instance.RegisterModuleInfo(module.order, module.name, module.tags);
+                ExtensionModuleService.Instance.RegisterModuleInfo(module.order, module.name, module.disabled, module.tags);
             }
 
             for (int n = 0; n < configures.aots.Count; ++n)
