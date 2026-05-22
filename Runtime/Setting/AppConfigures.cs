@@ -45,6 +45,10 @@ namespace NovaFramework
         [Tooltip("当此模式打开后程序将不会进入休眠状态")]
         public bool ScreenNeverSleep = false;
 
+        [FieldLabelName("后台运行模式")]
+        [Tooltip("当此模式打开后程序被切换到后台将保持运行状态")]
+        public bool RunInBackground = false;
+
         [EnumLabelName("网络消息包头长度")]
         [Tooltip("应用程序网络通信的消息包头长度设置，必须设置该选项后才可以进行网络通信")]
         public NetworkMessageHeaderSizeType NetworkMessageHeaderSize = NetworkMessageHeaderSizeType.Unknown;
@@ -73,6 +77,10 @@ namespace NovaFramework
         [FieldLabelName("调试窗口模式")]
         [Tooltip("当此模式打开后，程序将自动挂载调试窗口组件，支持查看程序运行时的动态分析数据")]
         public bool DebuggerWindowMode = false;
+
+        [FieldLabelName("调试控制台模式")]
+        [Tooltip("当此模式打开后，程序将自动启动控制台后台，支持查看程序运行时的动态指令控制")]
+        public bool DebuggerConsoleMode = false;
 
         [FieldLabelName("自动统计模式")]
         [Tooltip("当此模式打开后，程序将自动对实体对象进行统计，并在调试窗口中显示其统计信息")]

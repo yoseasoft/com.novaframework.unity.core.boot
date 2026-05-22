@@ -83,6 +83,7 @@ namespace NovaFramework
             // 运行设置
             vars.Add(nameof(configures.GameEntryName), configures.GameEntryName.ToString());
             vars.Add(nameof(configures.ScreenNeverSleep), configures.ScreenNeverSleep.ToString());
+            vars.Add(nameof(configures.RunInBackground), configures.RunInBackground.ToString());
             vars.Add(nameof(configures.NetworkMessageHeaderSize), ((int) configures.NetworkMessageHeaderSize).ToString());
 
             // 日志设置
@@ -107,9 +108,11 @@ namespace NovaFramework
             // 调试设置
 #if DEBUG
             vars.Add(nameof(configures.DebuggerWindowMode), configures.DebuggerWindowMode.ToString());
+            vars.Add(nameof(configures.DebuggerConsoleMode), configures.DebuggerConsoleMode.ToString());
             vars.Add(nameof(configures.AutoStatisticsMode), configures.AutoStatisticsMode.ToString());
 #else
             vars.Add(nameof(configures.DebuggerWindowMode), "false");
+            vars.Add(nameof(configures.DebuggerConsoleMode), "false");
             vars.Add(nameof(configures.AutoStatisticsMode), "false");
 #endif
 
